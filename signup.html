@@ -120,7 +120,7 @@
     <!-- Form groups -->
     <div class="form-group active" id="group1">
       <h3>Step 1: Personal Information</h3>
-      <form action="#" method="post" id="form1">
+      <form action="#" id="form1">
         <input type="text" name="firstname" placeholder="First Name" required><br>
         <input type="text" name="lastname" placeholder="Last Name" required><br>
         <div class="btn-container">
@@ -131,9 +131,9 @@
 
     <div class="form-group" id="group2">
       <h3>Step 2: Account Information</h3>
-      <form action="#" method="post" id="form2">
-        <input type="text" name="email" placeholder="Email" required><br>
-        <input type="password" name="password" placeholder="Password" required><br>
+      <form action="#" id="form2">
+        <input type="text" name="email" id="email" placeholder="Email" required><br>
+        <input type="password" name="password" id="password" placeholder="Password" required><br>
         <div class="btn-container">
           <input type="button" value="Previous" onclick="showGroup('group1')">
           <input type="button" value="Next" onclick="validateAndShow('group2', 'group3', 'form2')">
@@ -143,12 +143,12 @@
 
     <div class="form-group" id="group3">
       <h3>Step 3: Additional Information</h3>
-      <form action="#" method="post" id="form3">
+      <form action="#" id="form3">
         <input type="text" name="phone" placeholder="Phone Number" required><br>
         <input type="text" name="address" placeholder="Address" required><br>
         <div class="btn-container">
           <input type="button" value="Previous" onclick="showGroup('group2')">
-          <input type="submit" value="Sign Up">
+          <input type="submit" id="submit" value="Sign Up">
         </div>
       </form>
     </div>
@@ -156,7 +156,7 @@
     <p>Already have an account? <a class="login-link" href="login.html">Login</a></p>
   </div>
   <!-- Footer -->
-  <div class="footer">
+  <div class="footer" style="text-align: center;">
     &copy; 2024 Greater Grace Institute. All rights reserved.
   </div>
 
@@ -185,6 +185,51 @@
       }
       document.getElementById(groupID).classList.add("active");
     }
+  </script>
+  <!-- Firebase SDK CDN load -->
+  <script type="module">
+    // Import the functions you need from the SDKs you need
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-app.js";
+    import { getDatabase } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-database.js";
+    import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-auth.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyBs6eNM7ig2Yaly16j1a3FIo70RyyrSYvU",
+      authDomain: "learnify-419911.firebaseapp.com",
+      projectId: "learnify-419911",
+      storageBucket: "learnify-419911.appspot.com",
+      messagingSenderId: "600218874857",
+      appId: "1:600218874857:web:2d65e1d3e68b840938d178",
+      measurementId: "G-M8PS7BKZL0"
+    };
+  
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+
+    const email = document.getElementById('email')
+    const password = document.getElementById('password')
+    const submit = document.getElementById('submit')
+     
+    //Get database instance
+    const db = getDatabase();
+    const auth = getAuth(app);
+    
+    let signUp = evt => {
+            
+      ev.preventDefault();
+
+      createUserWithEmailAndPassword(auth, email.value.trim(), 
+      password.value.trim())
+      .then((credentials)=>{
+      console.log(credentials)
+      }).catch((err)=>{
+           console.log(err.message)
+      });
+
+
+    }
+
+  submit.addEventListener('click', signUp);
   </script>
 </body>
 </html>
