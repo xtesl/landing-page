@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign Up</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+      background-color: #37517e;
+    }
+
+    .navbar {
+      background-color: #37517e;
+      padding: 10px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .navbar-brand {
+      color: white;
+      font-size: 24px;
+      text-decoration: none;
+    }
+
+    .container {
+      background-color: white;
+      padding: 40px;
+      border-radius: 10px;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+      text-align: center;
+    }
+
+    h2 {
+      color: #37517e;
+      margin-bottom: 30px;
+    }
+
+    .form-group {
+      display: none;
+    }
+
+    .form-group.active {
+      display: block;
+    }
+
+    input[type="text"],
+    input[type="password"] {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 20px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      box-sizing: border-box;
+    }
+
+    input[type="submit"],
+    input[type="button"] {
+      width: calc(50% - 5px);
+      padding: 10px;
+      border: none;
+      border-radius: 5px;
+      background-color: #37517e;
+      color: white;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    input[type="submit"]:hover,
+    input[type="button"]:hover {
+      background-color: #1e2a3a;
+    }
+
+    input[type="button"] + input[type="button"] {
+      margin-left: 10px;
+    }
+
+    .login-link {
+      color: #37517e;
+    }
+
+    .login-link:hover {
+      color: #1e2a3a;
+    }
+
+    .footer {
+      background-color: #37517e;
+      color: white;
+      padding: 20px;
+      text-align: center;
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+    }
+
+    /* Adjusted button styles */
+    .btn-container {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 20px;
+    }
+
+    .btn-container input[type="button"] {
+      flex-basis: 48%;
+    }
+  </style>
+</head>
+<body>
+  <div class="navbar">
+    <a href="#" class="navbar-brand">
+      <img src="your-company-logo.png" alt="Company Logo" style="height: 40px;"> Company Name
+    </a>
+    <a href="index.html" class="home-link" style="color: white;">Home</a>
+  </div>
+  <div class="container">
+    <h2>Sign Up</h2>
+    <!-- Form groups -->
+    <div class="form-group active" id="group1">
+      <h3>Step 1: Personal Information</h3>
+      <form action="#" method="post" id="form1">
+        <input type="text" name="firstname" placeholder="First Name" required><br>
+        <input type="text" name="lastname" placeholder="Last Name" required><br>
+        <div class="btn-container">
+          <input type="button" value="Next" onclick="validateAndShow('group1', 'group2', 'form1')">
+        </div>
+      </form>
+    </div>
+
+    <div class="form-group" id="group2">
+      <h3>Step 2: Account Information</h3>
+      <form action="#" method="post" id="form2">
+        <input type="text" name="email" placeholder="Email" required><br>
+        <input type="password" name="password" placeholder="Password" required><br>
+        <div class="btn-container">
+          <input type="button" value="Previous" onclick="showGroup('group1')">
+          <input type="button" value="Next" onclick="validateAndShow('group2', 'group3', 'form2')">
+        </div>
+      </form>
+    </div>
+
+    <div class="form-group" id="group3">
+      <h3>Step 3: Additional Information</h3>
+      <form action="#" method="post" id="form3">
+        <input type="text" name="phone" placeholder="Phone Number" required><br>
+        <input type="text" name="address" placeholder="Address" required><br>
+        <div class="btn-container">
+          <input type="button" value="Previous" onclick="showGroup('group2')">
+          <input type="submit" value="Sign Up">
+        </div>
+      </form>
+    </div>
+    <!-- End of form groups -->
+    <p>Already have an account? <a class="login-link" href="login.html">Login</a></p>
+  </div>
+  <!-- Footer -->
+  <div class="footer">
+    &copy; 2024 Greater Grace Institute. All rights reserved.
+  </div>
+
+  <!-- JavaScript to toggle between form groups -->
+  <script>
+    function validateAndShow(currentGroup, nextGroup, formID) {
+      var fields = document.getElementById(formID).querySelectorAll("input[required]");
+      var isValid = true;
+      for (var i = 0; i < fields.length; i++) {
+        if (fields[i].value === "") {
+          isValid = false;
+          break;
+        }
+      }
+      if (isValid) {
+        showGroup(nextGroup);
+      } else {
+        alert("Please fill in all fields.");
+      }
+    }
+
+    function showGroup(groupID) {
+      var groups = document.getElementsByClassName("form-group");
+      for (var i = 0; i < groups.length; i++) {
+        groups[i].classList.remove("active");
+      }
+      document.getElementById(groupID).classList.add("active");
+    }
+  </script>
+</body>
+</html>
