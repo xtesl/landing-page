@@ -32,6 +32,7 @@
       border-radius: 10px;
       box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
       text-align: center;
+      margin-bottom: 70px; /* Added to prevent footer overlap */
     }
 
     h2 {
@@ -74,8 +75,14 @@
       background-color: #1e2a3a;
     }
 
-    input[type="button"] + input[type="button"] {
-      margin-left: 10px;
+    .btn-container {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 20px;
+    }
+
+    .btn-container input[type="button"] {
+      flex-basis: 48%;
     }
 
     .login-link {
@@ -86,6 +93,7 @@
       color: #1e2a3a;
     }
 
+    /* Footer styles */
     .footer {
       background-color: #37517e;
       color: white;
@@ -94,17 +102,12 @@
       position: fixed;
       bottom: 0;
       width: 100%;
+      left: 0;
     }
 
-    /* Adjusted button styles */
-    .btn-container {
-      display: flex;
-      justify-content: space-between;
-      margin-top: 20px;
-    }
-
-    .btn-container input[type="button"] {
-      flex-basis: 48%;
+    /* Adjusted footer text size */
+    .footer p {
+      font-size: 14px;
     }
   </style>
 </head>
@@ -156,8 +159,8 @@
     <p>Already have an account? <a class="login-link" href="login.html">Login</a></p>
   </div>
   <!-- Footer -->
-  <div class="footer" style="text-align: center;">
-    &copy; 2024 Greater Grace Institute. All rights reserved.
+  <div class="footer">
+    <p>&copy; 2024 Greater Grace Institute. All rights reserved.</p>
   </div>
 
   <!-- JavaScript to toggle between form groups -->
@@ -215,8 +218,7 @@
     const auth = getAuth(app);
     
     let signUp = evt => {
-            
-      ev.preventDefault();
+            evt.preventDefault();
 
       createUserWithEmailAndPassword(auth, email.value.trim(), 
       password.value.trim())

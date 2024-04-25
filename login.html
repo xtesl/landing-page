@@ -32,6 +32,7 @@
       border-radius: 10px;
       box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
       text-align: center;
+      margin-bottom: 70px; /* Added to prevent footer overlap */
     }
 
     h2 {
@@ -57,6 +58,7 @@
       background-color: #37517e;
       color: white;
       cursor: pointer;
+      transition: background-color 0.3s;
     }
 
     input[type="submit"]:hover {
@@ -71,6 +73,7 @@
       color: #1e2a3a;
     }
 
+    /* Footer styles */
     .footer {
       background-color: #37517e;
       color: white;
@@ -79,6 +82,12 @@
       position: fixed;
       bottom: 0;
       width: 100%;
+      left: 0;
+    }
+
+    /* Adjusted footer text size */
+    .footer p {
+      font-size: 14px;
     }
   </style>
 </head>
@@ -92,15 +101,15 @@
   <div class="container">
     <h2>Login</h2>
     <form action="#" method="post">
-      <input type="email" name="email" placeholder="Email" required>
-      <input type="password" name="password" placeholder="Password" required>
+      <input type="email" name="email" placeholder="Email" required><br>
+      <input type="password" name="password" placeholder="Password" required><br>
       <input type="submit" value="Login">
     </form>
     <p>Don't have an account? <a class="signup-link" href="signup.html">Sign up</a></p>
   </div>
  <!-- Footer -->
-  <div class="footer" style="text-align: center;">
-    &copy; 2024 Greater Grace Institute. All rights reserved.
+  <div class="footer">
+    <p>&copy; 2024 Greater Grace Institute. All rights reserved.</p>
   </div>
 </body>
 </html>
