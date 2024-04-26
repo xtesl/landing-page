@@ -65,12 +65,32 @@
       background-color: #1e2a3a;
     }
 
-    .signup-link {
+    .signup-link{
       color: #37517e;
     }
 
     .signup-link:hover {
       color: #1e2a3a;
+    }
+
+        .spinner {
+      display: none;
+      border: 4px solid rgba(255, 255, 255, 0.3);
+      border-radius: 50%;
+      border-top: 4px solid #37517e;
+      width: 40px;
+      height: 40px;
+      animation: spin 1s linear infinite;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+     
+    @keyframes spin {
+      0% { transform: translate(-50%, -50%) rotate(0deg); }
+      100% { transform: translate(-50%, -50%) rotate(360deg); }
     }
 
     /* Footer styles */
@@ -101,15 +121,63 @@
   <div class="container">
     <h2>Login</h2>
     <form action="#" method="post">
-      <input type="email" name="email" placeholder="Email" required><br>
-      <input type="password" name="password" placeholder="Password" required><br>
-      <input type="submit" value="Login">
+      <input type="email" name="email" id="email" placeholder="Email" required><br>
+      <input type="password" name="password" id="password" placeholder="Password" required><br>
+      <input type="submit" id="submit" value="Login">
     </form>
     <p>Don't have an account? <a class="signup-link" href="signup.html">Sign up</a></p>
   </div>
+   <div class="spinner" id="spinner"></div>
  <!-- Footer -->
   <div class="footer">
     <p>&copy; 2024 Greater Grace Institute. All rights reserved.</p>
   </div>
+ <!-- Firebase SDK CDN load -->
+ <script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-app.js";
+  import { getDatabase } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-database.js";
+  import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-auth.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyBs6eNM7ig2Yaly16j1a3FIo70RyyrSYvU",
+    authDomain: "learnify-419911.firebaseapp.com",
+    projectId: "learnify-419911",
+    storageBucket: "learnify-419911.appspot.com",
+    messagingSenderId: "600218874857",
+    appId: "1:600218874857:web:2d65e1d3e68b840938d178",
+    measurementId: "G-M8PS7BKZL0"
+  };
+
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+
+  const email = document.getElementById('email')
+  const password = document.getElementById('password')
+  const submit = document.getElementById('submit')
+  const spinner = document.getElementById('spinner')
+   
+  //Get database instance
+  const db = getDatabase();
+  const auth = getAuth(app);
+  
+  let signIn = evt => {
+          evt.preventDefault();
+          spinner.style.display = 'block';
+
+    signInWithEmailAndPassword(auth, email.value.trim(), 
+    password.value.trim())
+    .then((credentials)=>{
+      spinner.style.display = 'None';
+    alert(credentials)
+    }).catch((err)=>{
+      spinner.style.display ='None';
+         alert(err.message)
+    });
+
+
+  }
+
+submit.addEventListener('click', signIn);
+</script>
 </body>
 </html>
