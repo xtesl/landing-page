@@ -167,6 +167,7 @@
     signInWithEmailAndPassword(auth, email.value.trim(), 
     password.value.trim())
     .then((credentials)=>{
+      localStorage.setItem('isLoggedIn', 'true');
       //Direct user to home page 
       window.location.href = 'index.html'
     }).catch((err)=>{

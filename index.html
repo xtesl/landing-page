@@ -50,11 +50,12 @@
       <nav id="navbar" class="navbar">
         <ul>
           <li><a class="nav-link scrollto active" href="#hero">Home</a></li>
-          <li><a class="nav-link scrollto" href="#about">About</a></li>
-          <li><a class="nav-link scrollto" href="#team">Sign up</a></li>
+          <li id="dashboard"><a class="nav-link scrollto" href="#about">Dashboard</a></li>
+          <li id="login-link"><a class="nav-link scrollto" href="login.html">Login</a></li>
+          <li id="logout-link"><a class="nav-link scrollto" href="#">Logout</a></li>
           <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
           <li><a class="nav-link scrollto" href="#">Affiliate</a></li>
-          <li><a class="getstarted scrollto" href="signup.html">Get Started</a></li>
+          <li id="get-started"><a class="getstarted scrollto" href="signup.html">Get Started</a></li>
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->
@@ -388,13 +389,7 @@
       <div class="copyright">
         &copy; Copyright <strong><span>Greater Grace Institute</span></strong>. All Rights Reserved
       </div>
-      <div class="credits">
-        <!-- All the links in the footer should remain intact. -->
-        <!-- You can delete the links only if you purchased the pro version. -->
-        <!-- Licensing information: https://bootstrapmade.com/license/ -->
-        <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/arsha-free-bootstrap-html-template-corporate/ -->
-        Designed by <a href="https://bootstrapmade.com/">Immanuel</a>
-      </div>
+     
     </div>
   </footer><!-- End Footer -->
 
@@ -412,7 +407,29 @@
 
   <!-- Template Main JS File -->
   <script src="assets/js/main.js"></script>
+  <script>
+    window.onload = function() {
+      const isLoggedIn = localStorage.getItem('isLoggedIn');
+      if (isLoggedIn === 'true') {
+        document.getElementById('login-link').style.display = 'none';
+        document.getElementById('get-started').style.display = 'none';
+        document.getElementById('logout-link').style.display = 'block';
+        document.getElementById('dashboard').style.display = 'block';
+      } else {
+        document.getElementById('login-link').style.display = 'block';
+        document.getElementById('get-started').style.display = 'block';
+        document.getElementById('logout-link').style.display = 'none';
+        document.getElementById('dashboard').style.display = 'none';
+      }
+      
+      document.getElementById('logout-link').addEventListener('click', function() {
+        localStorage.removeItem('isLoggedIn'); // Remove login status
+        window.location.reload(); // Reload the page
+      });
 
+    
+    };
+  </script>
 </body>
 
 </html>
