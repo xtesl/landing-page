@@ -167,11 +167,13 @@
     signInWithEmailAndPassword(auth, email.value.trim(), 
     password.value.trim())
     .then((credentials)=>{
-      spinner.style.display = 'None';
-    alert(credentials)
+      //Direct user to home page 
+      window.location.href = 'index.html'
     }).catch((err)=>{
-      spinner.style.display ='None';
-         alert(err.message)
+      console.log(err)
+    }).finally(()=>{
+      //stop spinning
+      spinner.style.display = 'None';
     });
 
 
