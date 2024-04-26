@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard</title>
+  <link rel="stylesheet" href="assets/css/dashboard.css">
+</head>
+<body>
+  <div class="navbar">
+    <div class="logo">Dashboard</div>
+    <a href="logout.html" class="logout-link">Logout</a>
+  </div>
+  <div class="sidebar" id="sidebar">
+    <a href="#" class="sidebar-link active" onclick="toggleActive(event)">Home</a>
+    <a href="#" class="sidebar-link" onclick="toggleActive(event)">Profile</a>
+    <a href="#" class="sidebar-link" onclick="toggleActive(event)">Settings</a>
+    <a href="#" class="sidebar-link" onclick="toggleActive(event)">Reports</a>
+  </div>
+  <div class="main-content">
+    <h1>Welcome to Your Dashboard</h1>
+    <p>This is a more attractive dashboard layout designed to be visually appealing and functional.</p>
+  </div>
+  <script src="assets/js/dashboard.js"></script>
+</body>
+</html>
