@@ -19,6 +19,7 @@ body, html {
   
   .logo {
     font-weight: bold;
+    
     font-size: 24px;
   }
   
@@ -64,8 +65,28 @@ body, html {
     text-decoration: underline;
   }
 
-.sidebar a.active {
-    background-color: #1e2a3a;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+
+
+.sidebar {
+    background-color: #37517e;
+    color: white;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: -180px; /* Adjusted width */
+    width: 180px; /* Adjusted width */
+    padding: 20px;
+    transition: left 0.5s; /* Added transition */
+    box-shadow: 2px 0 5px rgba(0,0,0,0.2);
   }
+  
+  .toggle-btn {
+    background-color: transparent;
+    border: none;
+    color: white;
+    font-size: 24px;
+    cursor: pointer;
+    margin-right: 10px;
+  }
+  
   
