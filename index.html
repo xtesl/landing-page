@@ -54,8 +54,8 @@
           <li id="login-link"><a class="nav-link scrollto" href="login.html">Login</a></li>
           <li id="logout-link"><a class="nav-link scrollto" href="#">Logout</a></li>
           <li><a class="nav-link scrollto" href="#contact">Courses</a></li>
-          <li><a class="nav-link scrollto" href="#">Affiliate</a></li>
-          <li id="get-started"><a class="getstarted scrollto" href="signup.html">Get Started</a></li>
+          <li><a class="nav-link scrollto" href="#cta">Affiliate</a></li>
+          <li id="get-started-1"><a class="getstarted scrollto" href="signup.html">Get Started</a></li>
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->
@@ -72,7 +72,7 @@
           <h1>Become A Better Affiliate Marketer</h1>
           <h2>We offer an interactive affiliate marketing training</h2>
           <div class="d-flex justify-content-center justify-content-lg-start">
-            <a href="signup.html" class="btn-get-started scrollto">Get Started</a>
+            <a href="signup.html" id="get-started" class="btn-get-started scrollto">Get Started</a>
             <a href="https://www.youtube.com/watch?v=jDDaplaOz7Q" class="glightbox btn-watch-video"><i class="bi bi-play-circle"></i><span>Watch Video</span></a>
           </div>
         </div>
@@ -407,17 +407,19 @@
 
   <!-- Template Main JS File -->
   <script src="assets/js/main.js"></script>
-  <script>
+  <script>  
     window.onload = function() {
       const isLoggedIn = localStorage.getItem('isLoggedIn');
       if (isLoggedIn === 'true') {
         document.getElementById('login-link').style.display = 'none';
         document.getElementById('get-started').style.display = 'none';
+        document.getElementById('get-started-1').style.display = 'none';
         document.getElementById('logout-link').style.display = 'block';
         document.getElementById('dashboard').style.display = 'block';
       } else {
         document.getElementById('login-link').style.display = 'block';
         document.getElementById('get-started').style.display = 'block';
+        document.getElementById('get-started-1').style.display = 'block';
         document.getElementById('logout-link').style.display = 'none';
         document.getElementById('dashboard').style.display = 'none';
       }

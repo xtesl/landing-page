@@ -9,8 +9,9 @@
 <body>
   <div class="navbar">
     <button class="toggle-btn" onclick="toggleSidebar()">☰</button>
-    <div class="logo">Dashboard</div>
-    <a href="index.html" class="logout-link" id="logout-link">Logout</a>
+    <div class="logo" id="logo">Dashboard</div>
+    <a href="index.html" style="margin-left: 600px;" class="login-link">Home</a>
+    <a href="login.html" class="logout-link" id="logout-link">Logout</a>
   </div>
   <div class="sidebar" id="sidebar">
     <a href="#" class="sidebar-link active" onclick="selectLink(this)">Home</a>
@@ -24,6 +25,12 @@
   </div>
   <script src="assets/js/dashboard.js"></script>
   <script>
+     window.onload = function(){
+          
+      const user = JSON.parse(localStorage.getItem('user'));
+      const logo = document.getElementById('logo')
+      logo.innerText = `${user.firstname}`;
+     };
      document.getElementById('logout-link').addEventListener('click', function() {
         localStorage.removeItem('isLoggedIn'); // Remove login status
         window.location.reload(); // Reload the page

@@ -92,6 +92,26 @@
     .login-link:hover {
       color: #1e2a3a;
     }
+    .spinner {
+      display: none;
+      border: 4px solid rgba(255, 255, 255, 0.3);
+      border-radius: 50%;
+      border-top: 4px solid #37517e;
+      width: 40px;
+      height: 40px;
+      animation: spin 1s linear infinite;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+     
+    @keyframes spin {
+      0% { transform: translate(-50%, -50%) rotate(0deg); }
+      100% { transform: translate(-50%, -50%) rotate(360deg); }
+    }
+
 
     /* Footer styles */
     .footer {
@@ -124,8 +144,8 @@
     <div class="form-group active" id="group1">
       <h3>Step 1: Personal Information</h3>
       <form action="#" id="form1">
-        <input type="text" name="firstname" placeholder="First Name" required><br>
-        <input type="text" name="lastname" placeholder="Last Name" required><br>
+        <input type="text" id="firstname" name="firstname" placeholder="First Name" required><br>
+        <input type="text" id="lastname" name="lastname" placeholder="Last Name" required><br>
         <div class="btn-container">
           <input type="button" value="Next" onclick="validateAndShow('group1', 'group2', 'form1')">
         </div>
@@ -147,8 +167,8 @@
     <div class="form-group" id="group3">
       <h3>Step 3: Additional Information</h3>
       <form action="#" id="form3">
-        <input type="text" name="phone" placeholder="Phone Number" required><br>
-        <input type="text" name="address" placeholder="Address" required><br>
+        <input type="text" id="phone" name="phone" placeholder="Phone Number" required><br>
+        <input type="text" id="address" name="address" placeholder="Address" required><br>
         <div class="btn-container">
           <input type="button" value="Previous" onclick="showGroup('group2')">
           <input type="submit" id="submit" value="Sign Up">
@@ -158,6 +178,8 @@
     <!-- End of form groups -->
     <p>Already have an account? <a class="login-link" href="login.html">Login</a></p>
   </div>
+  <div class="spinner" id="spinner"></div>
+
   <!-- Footer -->
   <div class="footer">
     <p>&copy; 2024 Greater Grace Institute. All rights reserved.</p>
@@ -192,7 +214,7 @@
   <!-- Firebase SDK CDN load -->
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-app.js";
-    import { getDatabase } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-database.js";
+    import { getDatabase, set, ref } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-database.js";
     import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-auth.js";
 
     const firebaseConfig = {
@@ -208,9 +230,13 @@
     // Initialize Firebase
     const app = initializeApp(firebaseConfig);
 
-    const email = document.getElementById('email')
-    const password = document.getElementById('password')
-    const submit = document.getElementById('submit')
+    const email = document.getElementById('email');
+    const password = document.getElementById('password');
+    const firstname = document.getElementById('firstname');
+    const lastname = document.getElementById('lastname');
+    const phone = document.getElementById('phone');
+    const address = document.getElementById('address');
+    const submit = document.getElementById('submit');
      
     //Get database instance
     const db = getDatabase();
@@ -218,13 +244,27 @@
     
     let signUp = evt => {
             evt.preventDefault();
+            spinner.style.display = 'block';
 
       createUserWithEmailAndPassword(auth, email.value.trim(), 
       password.value.trim())
       .then((credentials)=>{
-      console.log(credentials)
+        //Store user info in firstore db
+        set(ref(db, "users/" + credentials.user.uid), {
+          firstname: firstname.value.trim(),
+          lastname: lastname.value.trim(),
+          phone: phone.value.trim(),
+          address: address.value.trim()
+         });
+
+         //log user in
+         localStorage.setItem('isLoggedIn', 'true');
+         //Direct user to home page
+        window.location.href = 'index.html';
       }).catch((err)=>{
-           console.log(err.message)
+           console.log(err.message);
+      }).finally(()=>{
+        spinner.style.display = 'none';
       });
 
 

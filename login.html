@@ -135,7 +135,7 @@
  <!-- Firebase SDK CDN load -->
  <script type="module">
   import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-app.js";
-  import { getDatabase } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-database.js";
+  import { getDatabase, get, ref, child } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-database.js";
   import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-auth.js";
 
   const firebaseConfig = {
@@ -159,6 +159,7 @@
   //Get database instance
   const db = getDatabase();
   const auth = getAuth(app);
+  const dbref = ref(db);
   
   let signIn = evt => {
           evt.preventDefault();
@@ -167,9 +168,23 @@
     signInWithEmailAndPassword(auth, email.value.trim(), 
     password.value.trim())
     .then((credentials)=>{
+      //Retrieve user info
+      get(child(dbref, 'users/' + credentials.user.uid)).then((snapshot)=>{
+         if(snapshot.exists){
+          localStorage.setItem('user', JSON.stringify({
+            firstname: snapshot.val().firstname,
+            lastname: snapshot.val().lastname,
+            address: snapshot.val().address,
+            phone: snapshot.val().phone
+          }));
+          
+      //log user in
       localStorage.setItem('isLoggedIn', 'true');
-      //Direct user to home page 
+       //Direct user to home page 
       window.location.href = 'index.html'
+         }
+      });
+
     }).catch((err)=>{
       console.log(err)
     }).finally(()=>{
