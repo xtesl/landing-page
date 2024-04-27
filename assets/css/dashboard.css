@@ -1,72 +1,145 @@
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
-  
-  body {
-    font-family: Arial, sans-serif;
-  }
-  
-  .navbar {
-    background: linear-gradient(135deg, #37517e, #3a7bd5); /* Gradient background */
-    color: white;
-    padding: 10px 20px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  
-  .toggle-btn {
-    background-color: transparent;
-    border: none;
-    color: white;
-    font-size: 24px;
-    cursor: pointer;
-    z-index: 2;
-  }
-  
-  .logo {
-    font-size: 24px;
-    text-align: center;
-    margin-left: 50px; /* Adjusted margin */
-  }
-  
-  .logout-link, .login-link {
-    color: white;
-    text-decoration: none;
-  }
-  
-  .sidebar {
-    background-color: rgba(55, 81, 126, 0.9); /* Transparent color */
-    color: white;
-    position: fixed;
-    top: 0;
-    left: -200px; /* Sidebar hidden by default */
-    width: 200px;
-    height: 100vh;
-    padding-top: 60px;
-    transition: left 0.3s ease-in-out; /* Smooth transition */
-  }
-  
-  .sidebar-link {
-    display: block;
-    color: white;
-    text-decoration: none;
-    padding: 10px 20px;
-    transition: background-color 0.3s;
-  }
-  
-  .sidebar-link:hover {
-    background-color: rgba(255, 255, 255, 0.1);
-  }
-  
-  .sidebar-link.active {
-    background-color: rgba(255, 255, 255, 0.2);
-  }
-  
-  .main-content {
-    margin-left: 20px; /* Margin to prevent content from being covered */
-    padding: 20px;
-  }
-  
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+}
+
+.navbar {
+  background: linear-gradient(135deg, #37517e, #3a7bd5); /* Gradient background */
+  color: white;
+  padding: 10px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.toggle-btn {
+  background-color: transparent;
+  border: none;
+  color: white;
+  font-size: 24px;
+  cursor: pointer;
+  z-index: 2;
+}
+
+.logo {
+  font-size: 24px;
+  text-align: center;
+  margin-left: 50px; /* Adjusted margin */
+}
+
+.logout-link, .login-link {
+  color: white;
+  text-decoration: none;
+}
+
+.sidebar {
+  background-color: rgba(55, 81, 126, 0.9); /* Transparent color */
+  color: white;
+  position: fixed;
+  top: 0;
+  left: -200px; /* Sidebar hidden by default */
+  width: 200px;
+  height: 100vh;
+  padding-top: 60px;
+  transition: left 0.3s ease-in-out; /* Smooth transition */
+}
+
+.sidebar-link {
+  display: block;
+  color: white;
+  text-decoration: none;
+  padding: 10px 20px;
+  transition: background-color 0.3s;
+}
+
+.sidebar-link:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.sidebar-link.active {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.main-content {
+  margin-left: 20px; /* Margin to prevent content from being covered */
+  padding: 20px;
+}
+
+.page {
+  display: none;
+  transition: opacity 0.5s ease-in-out;
+}
+
+.page.active {
+  display: block;
+  opacity: 1;
+}
+
+/*
+Profile page styles
+*/
+
+#profile .profile-info {
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+#profile .form-group {
+  margin-bottom: 20px;
+}
+
+#profile label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+#profile input[type="text"],
+#profile textarea {
+  width: calc(100% - 60px); /* Adjusted width for edit button */
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+#profile textarea {
+  resize: vertical;
+}
+
+#profile button {
+  background-color: #4CAF50;
+  color: white;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+#profile button:hover {
+  background-color: #45a049;
+}
+
+#profile button.edit {
+  background-color: #ff9800; /* Orange color */
+}
+
+#profile button.edit:hover {
+  background-color: #e68a00; /* Darker orange color */
+}
+
+#profile button.save {
+  display: none;
+  background-color: #2196F3; /* Blue color */
+ 
+}
+
+#profile button.save:hover {
+  background-color: #0b7dda; /* Darker blue color */
+}
+
