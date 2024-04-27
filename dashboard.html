@@ -12,9 +12,9 @@
    
   <!-- Navbar -->
     
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container-fluid">
-      <a class="navbar-brand" href="#">Navbar</a>
+      <div class="navbar-brand light">Dashboard</div>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -51,56 +51,14 @@
 
   <!-- End navbar -->
 
-  <div class="sidebar" id="sidebar">
-    <a href="index.html" class="sidebar-link">Home</a>
-    <a href="#" class="sidebar-link" onclick="showPage('profile')">Profile</a>
-    <a href="#" class="sidebar-link" onclick="showPage('settings')">Settings</a>
-    <a href="#" class="sidebar-link" onclick="showPage('reports')">Reports</a>
-  </div>
+
   <div class="main-content" id="main-content">
     <div id="home" class="page active">
       <h1>Welcome to Your Dashboard</h1>
       <p>This is a more attractive dashboard layout designed to be visually appealing and functional.</p>
     </div>
-    <!-- Profile section -->
-    <div id="profile" class="page">
-      <h1>Profile</h1>
-      <div class="profile-info">
-        <div class="form-group">
-          <label for="firstname">First Name:</label>
-          <input type="text" id="firstname" value="John" readonly>
-          <button onclick="toggleEdit('firstname')">Edit</button>
-        </div>
-        <div class="form-group">
-          <label for="lastname">Last Name:</label>
-          <input type="text" id="lastname" value="Doe" readonly>
-          <button onclick="toggleEdit('lastname')">Edit</button>
-        </div>
-        <div class="form-group">
-          <label for="address">Address:</label>
-          <textarea id="address" readonly>123 Main St, Anytown</textarea>
-          <button onclick="toggleEdit('address')">Edit</button>
-        </div>
-        <div class="form-group">
-          <label for="phone">Phone:</label>
-          <input type="text" id="phone" value="555-123-4567" readonly>
-          <button onclick="toggleEdit('phone')">Edit</button>
-        </div>
-        <button id="saveProfileBtn" onclick="saveProfile()" style="display: none;">Save</button>
-      </div>
-    </div>
-    
-    <!--End profile-->
-    <div id="settings" class="page">
-      <h1>Settings Page</h1>
-      <p>This is your settings page.</p>
-    </div>
-    <div id="reports" class="page">
-      <h1>Reports Page</h1>
-      <p>This is your reports page.</p>
-    </div>
+
   </div>
-  <script src="assets/js/dashboard.js"></script>
   <script>
     window.onload = function(){
       const user = JSON.parse(localStorage.getItem('user'));
@@ -125,24 +83,6 @@
       window.location.reload(); // Reload the page
     });
 
-    function toggleSidebar() {
-      var sidebar = document.getElementById('sidebar');
-      var sidebarWidth = sidebar.offsetWidth;
-
-      if (sidebar.style.left === '0px') {
-        sidebar.style.left = -sidebarWidth + 'px'; // Close sidebar
-      } else {
-        sidebar.style.left = '0px'; // Open sidebar
-      }
-    }
-
-    function showPage(pageId) {
-      var pages = document.getElementsByClassName('page');
-      for (var i = 0; i < pages.length; i++) {
-        pages[i].classList.remove('active');
-      }
-      document.getElementById(pageId).classList.add('active');
-    }
   </script>
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
