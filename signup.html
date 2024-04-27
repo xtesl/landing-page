@@ -257,10 +257,8 @@
           address: address.value.trim()
          });
 
-         //log user in
-         localStorage.setItem('isLoggedIn', 'true');
-         //Direct user to home page
-        window.location.href = 'index.html';
+         //Direct user to login page
+        window.location.href = 'login.html';
       }).catch((err)=>{
            console.log(err.message);
       }).finally(()=>{
