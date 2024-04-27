@@ -255,10 +255,12 @@
           lastname: lastname.value.trim(),
           phone: phone.value.trim(),
           address: address.value.trim()
-         });
-
+         }).then(()=>{
+             
          //Direct user to login page
         window.location.href = 'login.html';
+         });
+
       }).catch((err)=>{
            console.log(err.message);
       }).finally(()=>{
