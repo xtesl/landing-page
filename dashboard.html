@@ -10,7 +10,7 @@
   <div class="navbar">
     <button class="toggle-btn" onclick="toggleSidebar()">☰</button>
     <div class="logo">Dashboard</div>
-    <a href="#" class="logout-link">Logout</a>
+    <a href="index.html" class="logout-link" id="logout-link">Logout</a>
   </div>
   <div class="sidebar" id="sidebar">
     <a href="#" class="sidebar-link active" onclick="selectLink(this)">Home</a>
@@ -23,5 +23,11 @@
     <p>This is a more attractive dashboard layout designed to be visually appealing and functional.</p>
   </div>
   <script src="assets/js/dashboard.js"></script>
+  <script>
+     document.getElementById('logout-link').addEventListener('click', function() {
+        localStorage.removeItem('isLoggedIn'); // Remove login status
+        window.location.reload(); // Reload the page
+      });
+  </script>
 </body>
 </html>
