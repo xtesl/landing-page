@@ -8,15 +8,15 @@
 </head>
 <body>
   <div class="navbar">
-    <div class="logo">Dashboard</div>
     <button class="toggle-btn" onclick="toggleSidebar()">☰</button>
-    <a href="logout.html" class="logout-link">Logout</a>
+    <div class="logo">Dashboard</div>
+    <a href="#" class="logout-link">Logout</a>
   </div>
   <div class="sidebar" id="sidebar">
-    <a href="#" class="sidebar-link active" onclick="toggleActive(event)">Home</a>
-    <a href="#" class="sidebar-link" onclick="toggleActive(event)">Profile</a>
-    <a href="#" class="sidebar-link" onclick="toggleActive(event)">Settings</a>
-    <a href="#" class="sidebar-link" onclick="toggleActive(event)">Reports</a>
+    <a href="#" class="sidebar-link active" onclick="selectLink(this)">Home</a>
+    <a href="#" class="sidebar-link" onclick="selectLink(this)">Profile</a>
+    <a href="#" class="sidebar-link" onclick="selectLink(this)">Settings</a>
+    <a href="#" class="sidebar-link" onclick="selectLink(this)">Reports</a>
   </div>
   <div class="main-content">
     <h1>Welcome to Your Dashboard</h1>

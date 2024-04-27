@@ -1,14 +1,19 @@
-function toggleActive(event) {
-    var links = document.querySelectorAll('.sidebar-link');
-    links.forEach(function(link) {
-      link.classList.remove('active');
-    });
-    event.target.classList.add('active');
+function toggleSidebar() {
+    var sidebar = document.getElementById('sidebar');
+    var sidebarWidth = sidebar.offsetWidth;
+  
+    if (sidebar.style.left === '0px') {
+      sidebar.style.left = -sidebarWidth + 'px'; // Close sidebar
+    } else {
+      sidebar.style.left = '0px'; // Open sidebar
+    }
   }
   
-  function toggleSidebar() {
-    var sidebar = document.getElementById('sidebar');
-    var isOpen = sidebar.style.left === '0px';
-    sidebar.style.left = isOpen ? '-180px' : '0';
+  function selectLink(link) {
+    var links = document.getElementsByClassName('sidebar-link');
+    for (var i = 0; i < links.length; i++) {
+      links[i].classList.remove('active');
+    }
+    link.classList.add('active');
   }
   
