@@ -21,9 +21,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // Sample course data
 const courses = [
-    { title: "Virtual Pencil Art", description: "Learn to make beautiful and aesthetic pencil art using just your smartphone.", image: "https://drive.google.com/file/d/1fjqfNFSWZhKDdsifMtd3lbkspoCOHAXf/preview" },
-    { title: "Blockchain Basics", description: "Understand blockchain technology and its applications.", image: "https://drive.google.com/file/d/1gzjKosP-m11yxCbHW71YOHlftuqoBRJJ/preview"},
-    { title: "Cybersecurity Principles", description: "Protect systems and data from cyber threats.", image: "https://drive.google.com/file/d/1gzjKosP-m11yxCbHW71YOHlftuqoBRJJ/preview" }
+    { title: "Virtual Pencil Art", description: "Learn to make beautiful and aesthetic pencil art using just your smartphone.", image: "https://drive.google.com/file/d/1fjqfNFSWZhKDdsifMtd3lbkspoCOHAXf/preview"
+ ,price: '10.00'},
+    { title: "Blockchain Basics", description: "Understand blockchain technology and its applications.", image: "https://drive.google.com/file/d/1gzjKosP-m11yxCbHW71YOHlftuqoBRJJ/preview",
+price: '10.00'},
+    { title: "Cybersecurity Principles", description: "Protect systems and data from cyber threats.", image: "https://drive.google.com/file/d/1gzjKosP-m11yxCbHW71YOHlftuqoBRJJ/preview", 
+price: '10.00' }
 ];
 let currentPage = 1;
 const perPage = 6;
@@ -43,6 +46,7 @@ function renderCourses(page) {
             <iframe src="${course.image}"></iframe>
             <div class="course-info">
                 <h3>${course.title}</h3>
+                <h1 style="display:none">${course.price}</h1>
                 <p>${course.description}</p>
                 <button class="btn">Enroll Now</button>
             </div>
@@ -103,6 +107,7 @@ function renderCoursesSpecific(coursesToRender) {
             <iframe src="${course.image}"></iframe>
             <div class="course-info">
                 <h3>${course.title}</h3>
+                <h1 style='display=none;'>${course.price}</h1>
                 <p>${course.description}</p>
                 <button class="btn">Enroll Now</button>
             </div>
@@ -129,7 +134,8 @@ function addEnrollListeners() {
             const course = {
                 title: courseCard.querySelector('h3').textContent,
                 description: courseCard.querySelector('p').textContent,
-                image: courseCard.querySelector('iframe').src
+                image: courseCard.querySelector('iframe').src,
+                price: courseCard.querySelector('h1').textContent
             };
             localStorage.setItem('course', JSON.stringify(course));
             window.location.href = 'enroll_page.html';
