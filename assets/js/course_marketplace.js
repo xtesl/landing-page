@@ -23,7 +23,7 @@ const courses = [
     { title: "Project Management", description: "Skills for managing projects efficiently.", image: "course-image.jpg" },
     { title: "Digital Marketing", description: "Strategies and tools for effective digital marketing.", image: "course-image.jpg" },
     { title: "Blockchain Basics", description: "Understand blockchain technology and its applications.", image: "course-image.jpg" },
-    { title: "Cybersecurity Principles", description: "Protect systems and data from cyber threats.", image: "course-image.jpg" }
+    { title: "Cybersecurity Principles", description: "Protect systems and data from cyber threats.", image: "https://drive.google.com/file/d/1gzjKosP-m11yxCbHW71YOHlftuqoBRJJ/preview" }
 ];
 let currentPage = 1;
 const perPage = 6;
@@ -39,7 +39,7 @@ function renderCourses(page) {
         const courseCard = document.createElement('div');
         courseCard.className = 'course-card';
         courseCard.innerHTML = `
-            <img src="${course.image}" alt="Course Image" class="course-image">
+            <iframe src="${course.image}"></iframe>
             <div class="course-info">
                 <h3>${course.title}</h3>
                 <p>${course.description}</p>
