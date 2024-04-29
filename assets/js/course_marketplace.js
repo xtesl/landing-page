@@ -1,4 +1,3 @@
-// File: assets/js/main.js
 document.addEventListener('DOMContentLoaded', () => {
     const navItems = document.querySelectorAll('.nav-item');
 
@@ -8,9 +7,16 @@ document.addEventListener('DOMContentLoaded', () => {
             this.classList.add('active');
         });
     });
+
+    const enrollButtons = document.querySelectorAll('.course-card .btn');
+
+    enrollButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            // Redirect to the enrollment page
+            // window.location.href = 'enroll_page.html';
+        });
+    });
 });
-
-
 
 // Sample course data
 const courses = [
@@ -42,6 +48,7 @@ function renderCourses(page) {
         `;
         container.appendChild(courseCard);
     });
+    addEnrollListeners(); // Add event listeners after rendering
 }
 
 function changePage(direction) {
@@ -62,8 +69,6 @@ window.onload = function() {
     changePage(0); // Load initial page
 };
 
-
-
 //Search functionality
 function searchCourses() {
     const searchInput = document.getElementById('searchInput').value.toLowerCase();
@@ -79,9 +84,8 @@ function renderCoursesSpecific(coursesToRender) {
     const container = document.getElementById('courseContainer');
     container.innerHTML = ""; // Clear previous content
 
-
      // Check if there are no courses matching the search
-     if (coursesToRender.length === 0) {
+    if (coursesToRender.length === 0) {
         document.getElementById('noResultsMessage').style.display = 'block';
         // Hide pagination
         document.querySelector('.pagination').style.display = 'none';
@@ -94,7 +98,8 @@ function renderCoursesSpecific(coursesToRender) {
         const courseCard = document.createElement('div');
         courseCard.className = 'course-card';
         courseCard.innerHTML = `
-            <img src="${course.image}" alt="Course Image" class="course-image">
+        <div class="video-overlay"></div>
+            <iframe src="${course.image}"></iframe>
             <div class="course-info">
                 <h3>${course.title}</h3>
                 <p>${course.description}</p>
@@ -104,10 +109,27 @@ function renderCoursesSpecific(coursesToRender) {
         container.appendChild(courseCard);
     });
 
+    addEnrollListeners(); // Add event listeners after rendering
+
     // Update pagination visibility and info based on search results
     document.querySelector('.pagination').style.display = coursesToRender.length > 0 ? 'flex' : 'none';
     document.getElementById('totalPages').textContent = Math.ceil(coursesToRender.length / perPage);
     document.getElementById('currentPage').textContent = 1;
     document.getElementById('prevBtn').disabled = true;
     document.getElementById('nextBtn').disabled = coursesToRender.length <= perPage;
+}
+
+function addEnrollListeners() {
+    const enrollButtons = document.querySelectorAll('.course-card .btn');
+
+    enrollButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            // Redirect to the enrollment page
+            localStorage.setItem('course', JSON.stringify({
+                
+            }))
+            window.location.href = 'enroll_page.html';
+
+        });
+    });
 }
