@@ -12,8 +12,8 @@
         <div class="container-fluid">
           <a class="navbar-brand nav-logo">Explore Courses</a>
           <form class="d-flex" role="search">
-            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-success" type="submit">Search</button>
+            <input class="form-control me-2" id="searchInput" type="search" placeholder="Search courses..." aria-label="Search">
+            <button class="btn btn-outline-success" onclick="searchCourses()" type="button">Search</button>
           </form>
         </div>
       </nav>
@@ -23,46 +23,22 @@
         <p>Choose from a wide range of topics and levels - all designed to take you to the next level.</p>
     </div>
 
-    <div class="course-container">
-        <!-- Repeat for each course -->
-        <div class="course-card">
-            <img src="course-image.jpg" alt="Course Image" class="course-image">
-            <div class="course-info">
-                <h3>Introduction to Programming</h3>
-                <p>Learn the basics of programming through easy to follow lessons and examples.</p>
-                <button class="btn">Enroll Now</button>
-            </div>
-        </div>
-
-        <div class="course-card">
-            <img src="course-image.jpg" alt="Course Image" class="course-image">
-            <div class="course-info">
-                <h3>Introduction to Programming</h3>
-                <p>Learn the basics of programming through easy to follow lessons and examples.</p>
-                <button class="btn">Enroll Now</button>
-            </div>
-        </div>
-        <div class="course-card">
-            <img src="course-image.jpg" alt="Course Image" class="course-image">
-            <div class="course-info">
-                <h3>Introduction to Programming</h3>
-                <p>Learn the basics of programming through easy to follow lessons and examples.</p>
-                <button class="btn">Enroll Now</button>
-            </div>
-        </div>
-        <div class="course-card">
-            <img src="course-image.jpg" alt="Course Image" class="course-image">
-            <div class="course-info">
-                <h3>Introduction to Programming</h3>
-                <p>Learn the basics of programming through easy to follow lessons and examples.</p>
-                <button class="btn">Enroll Now</button>
-            </div>
-        </div>
+    <div class="course-container" id="courseContainer">
+       
         <!-- More course cards -->
     </div>
+
+    <!-- Pagination Controls -->
+<div class="pagination">
+  <button class="page-btn" onclick="changePage(-1)" id="prevBtn">Prev</button>
+  <span class="page-info">Page <span id="currentPage">1</span> of <span id="totalPages"></span></span>
+  <button class="page-btn" onclick="changePage(1)" id="nextBtn">Next</button>
+</div>
+
     <!-- Footer -->
   <div class="footer">
     <p>&copy; 2024 Greater Grace Institute. All rights reserved.</p>
   </div>
+  <script src="assets/js/course_marketplace.js"></script>
 </body>
 </html>
