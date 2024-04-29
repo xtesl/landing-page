@@ -14,14 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // Sample course data
 const courses = [
-    { title: "Introduction to Programming", description: "Learn the basics of programming through easy to follow lessons and examples.", image: "course-image.jpg" },
-    { title: "Advanced JavaScript", description: "Dive deep into JavaScript with advanced concepts and frameworks.", image: "course-image.jpg" },
-    { title: "Web Development", description: "Learn to build and deploy websites from scratch.", image: "course-image.jpg" },
-    { title: "Data Analysis with Python", description: "Analyze data effectively using Python and libraries like Pandas.", image: "course-image.jpg" },
-    { title: "Machine Learning Essentials", description: "Start your journey into the world of AI and machine learning.", image: "course-image.jpg" },
-    { title: "UI/UX Design Fundamentals", description: "Master the basics of designing engaging user interfaces and experiences.", image: "course-image.jpg" },
-    { title: "Project Management", description: "Skills for managing projects efficiently.", image: "course-image.jpg" },
-    { title: "Digital Marketing", description: "Strategies and tools for effective digital marketing.", image: "course-image.jpg" },
+    { title: "Virtual Pencil Art", description: "Learn to make beautiful and aesthetic pencil art using just your smartphone.", image: "https://drive.google.com/file/d/1fjqfNFSWZhKDdsifMtd3lbkspoCOHAXf/preview" },
     { title: "Blockchain Basics", description: "Understand blockchain technology and its applications.", image: "https://drive.google.com/file/d/1gzjKosP-m11yxCbHW71YOHlftuqoBRJJ/preview"},
     { title: "Cybersecurity Principles", description: "Protect systems and data from cyber threats.", image: "https://drive.google.com/file/d/1gzjKosP-m11yxCbHW71YOHlftuqoBRJJ/preview" }
 ];
