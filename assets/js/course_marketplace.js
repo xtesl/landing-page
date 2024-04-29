@@ -22,7 +22,7 @@ const courses = [
     { title: "UI/UX Design Fundamentals", description: "Master the basics of designing engaging user interfaces and experiences.", image: "course-image.jpg" },
     { title: "Project Management", description: "Skills for managing projects efficiently.", image: "course-image.jpg" },
     { title: "Digital Marketing", description: "Strategies and tools for effective digital marketing.", image: "course-image.jpg" },
-    { title: "Blockchain Basics", description: "Understand blockchain technology and its applications.", image: "course-image.jpg" },
+    { title: "Blockchain Basics", description: "Understand blockchain technology and its applications.", image: "https://drive.google.com/file/d/1gzjKosP-m11yxCbHW71YOHlftuqoBRJJ/preview"},
     { title: "Cybersecurity Principles", description: "Protect systems and data from cyber threats.", image: "https://drive.google.com/file/d/1gzjKosP-m11yxCbHW71YOHlftuqoBRJJ/preview" }
 ];
 let currentPage = 1;
@@ -39,6 +39,7 @@ function renderCourses(page) {
         const courseCard = document.createElement('div');
         courseCard.className = 'course-card';
         courseCard.innerHTML = `
+        <div class="video-overlay"></div>
             <iframe src="${course.image}"></iframe>
             <div class="course-info">
                 <h3>${course.title}</h3>
@@ -84,6 +85,17 @@ function searchCourses() {
 function renderCoursesSpecific(coursesToRender) {
     const container = document.getElementById('courseContainer');
     container.innerHTML = ""; // Clear previous content
+
+
+     // Check if there are no courses matching the search
+     if (coursesToRender.length === 0) {
+        document.getElementById('noResultsMessage').style.display = 'block';
+        // Hide pagination
+        document.querySelector('.pagination').style.display = 'none';
+        return; // Exit the function
+    } else {
+        document.getElementById('noResultsMessage').style.display = 'none'; // Hide message if there are results
+    }
 
     coursesToRender.forEach(course => {
         const courseCard = document.createElement('div');
