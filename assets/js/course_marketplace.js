@@ -12,8 +12,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     enrollButtons.forEach(button => {
         button.addEventListener('click', () => {
-            // Redirect to the enrollment page
-            // window.location.href = 'enroll_page.html';
+            const courseCard = button.closest('.course-card');
+          
+            window.location.href = 'enroll_page.html';
         });
     });
 });
@@ -124,10 +125,13 @@ function addEnrollListeners() {
 
     enrollButtons.forEach(button => {
         button.addEventListener('click', () => {
-            // Redirect to the enrollment page
-            localStorage.setItem('course', JSON.stringify({
-                
-            }))
+            const courseCard = button.closest('.course-card');
+            const course = {
+                title: courseCard.querySelector('h3').textContent,
+                description: courseCard.querySelector('p').textContent,
+                image: courseCard.querySelector('iframe').src
+            };
+            localStorage.setItem('course', JSON.stringify(course));
             window.location.href = 'enroll_page.html';
 
         });
