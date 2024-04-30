@@ -18,6 +18,7 @@
     border-radius: 10px;
     padding: 30px;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 70px; /* Added margin to accommodate the footer */
   }
   
   h1 {
@@ -66,6 +67,10 @@
     color: white;
     padding: 20px;
     text-align: center;
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+    left: 0;
     box-sizing: border-box;
   }
 </style>
@@ -73,24 +78,23 @@
 <body>
 
 <div class="container">
-    <div class="alert alert-danger" role="alert" id="alert" style="display: none;">
-        You are not eligible to join the program
-
+    <div class="alert alert-danger" style="display: none;" role="alert">
+        A simple danger alert—check it out!
       </div>
   <h1 class="text-center">Affiliate Program</h1>
   <p class="text-center">Join our affiliate program and start earning commissions today!</p>
   <p class="note text-center">Please note: You can only join the affiliate program after purchasing our Affiliate Course on the platform.</p>
   <form action="#" method="post">
     <div class="mb-3">
-      <input type="text" class="form-control" name="fullname" id="fullname" placeholder="Full Name" required>
+      <input type="text" class="form-control" name="fullname" placeholder="Full Name" required>
     </div>
     <div class="mb-3">
-      <input type="email" class="form-control" id="email" name="email" placeholder="Email Address" required>
+      <input type="email" class="form-control" name="email" placeholder="Email Address" required>
     </div>
     <div class="mb-3">
       <input type="text" class="form-control" name="website" placeholder="Website (Optional)">
     </div>
-    <button type="button" class="btn btn-primary btn-block">Join Now</button>
+    <button type="submit" class="btn btn-primary btn-block">Join Now</button>
   </form>
 </div>
 
@@ -115,28 +119,17 @@
     const db = getDatabase();
     const dbref = ref(db);
     const credential = JSON.parse(localStorage.getItem('credential'));
-    const alert = document.getElementById('alert');
-    email = document.getElementById('email').value.trim();
-    fullname = document.getElementById('fullname').value.trim();
 
-  const get_info = function() {get(child(dbref, 'users/' + credential.user.uid)).then((snapshot)=>{
+  const get_info = get(child(dbref, 'users/' + credential.user.uid)).then((snapshot)=>{
                if(snapshot.exists){
-                if(snapshot.val().courses.affiliate){
-                }else{
-                    if(!fullname || !email){
-                        alert.innerText = 'Please fill the forms';
-                    alert.style.display = 'block';
-
-                    }
-                }
+                console.log(snapshot.val().courses.affiliate);
              
                }
             }).catch((err)=>{
               console.log(err.message);
             });
-        }
     
- const join_button = document.querySelector('button[type="button"]');
+ const join_button = document.querySelector('button[type="submit"]');
  join_button.addEventListener('click', get_info);
     
   </script>
