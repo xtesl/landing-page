@@ -250,12 +250,19 @@
       createUserWithEmailAndPassword(auth, email.value.trim(), 
       password.value.trim())
       .then((credentials)=>{
-        //Store user info in firstore db
         set(ref(db, "users/" + credentials.user.uid), {
           firstname: firstname.value.trim(),
           lastname: lastname.value.trim(),
           phone: phone.value.trim(),
-          address: address.value.trim()
+          address: address.value.trim(),
+          courses: {
+            placeholder: true
+          },
+          affiliate: false,
+          children: {
+            placeholder:true
+          },
+          amount: 0.00
          }).then(()=>{
              
          //Direct user to login page

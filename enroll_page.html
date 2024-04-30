@@ -64,6 +64,11 @@
     <script>
         //Course meta data
         const course = JSON.parse(localStorage.getItem('course'));
+        
+        //If No data to display redirect user back
+        if(!course){
+            window.location.href = 'course_marketplace.html';
+        }
 
         //Set course meta data
         const courseTitle = document.getElementById('course-title');

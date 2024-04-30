@@ -14,6 +14,8 @@
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container-fluid">
       <div class="navbar-brand light">Dashboard</div>
+      <div class="navbar-brand light"  id="amount"></div>
+
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -26,6 +28,8 @@
           <li class="nav-item">
             <a class="nav-link" href="course_marketplace.html" tabindex="-1">Course Marketplace</a>
           </li>
+          
+          
         </ul>
         <form class="d-flex">
           <button type="button" id="logout-link" class="btn btn-light">Logout</button>
@@ -50,32 +54,52 @@
     <p>&copy; 2024 Greater Grace Institute. All rights reserved.</p>
   </div>
 
+     <script type="module">
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-app.js";
+      import { getDatabase, get, ref, child, set} from "https://www.gstatic.com/firebasejs/10.11.1/firebase-database.js";
+  
+      const firebaseConfig = {
+        apiKey: "AIzaSyBs6eNM7ig2Yaly16j1a3FIo70RyyrSYvU",
+        authDomain: "learnify-419911.firebaseapp.com",
+        projectId: "learnify-419911",
+        storageBucket: "learnify-419911.appspot.com",
+        messagingSenderId: "600218874857",
+        appId: "1:600218874857:web:2d65e1d3e68b840938d178",
+        measurementId: "G-M8PS7BKZL0"
+      };
+      const app = initializeApp(firebaseConfig);
+      const db = getDatabase();
+      const dbref = ref(db);
+      const credential = JSON.parse(localStorage.getItem('credential'));
+  
+    get(child(dbref, 'users/' + credential.user.uid)).then((snapshot)=>{
+                 if(snapshot.exists){
+                  console.log(snapshot.val().affiliate);
+                  if(snapshot.val().affiliate){
+                    document.getElementById('amount').innerText = `$${snapshot.val().amount}.00`
+                  }
+                 }
+              }).catch((err)=>{
+                console.log(err.message);
+              });
+      
+    </script>
   <script>
 
     window.onload = function(){
-      const user = JSON.parse(localStorage.getItem('user'));
+      const isLoggedIn = localStorage.getItem('isLoggedIn');
+      const credential = localStorage.getItem('credential');
+      if(!isLoggedIn && !credential){
+        window.location.href = 'login.html';
+      }
       
-      
-
-      const firstname = document.getElementById('firstname');
-      const lastname = document.getElementById('lastname');
-      const address = document.getElementById('address');
-      const phone = document.getElementById('phone');
-
-      //populate fields with data
-      firstname.value = user.firstname;
-      lastname.value = user.lastname;
-      address.value = user.address;
-      phone.value = user.phone;
-
     };
 
     document.getElementById('logout-link').addEventListener('click', function() {
       localStorage.removeItem('isLoggedIn'); // Remove login status
+      localStorage.removeItem('credential');
       window.location.href = 'login.html' // Reload the page
     });
-
-    
 
   </script>
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
