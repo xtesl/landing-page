@@ -98,7 +98,7 @@
         <a href="index.html" class="home-link" style="color: white;">Home</a>
       </div>
 <div class="container">
-    <div class="alert alert-danger" style="display: none;" role="alert">
+    <div class="alert alert-danger" id="alert" style="display: none;" role="alert">
         A simple danger alert—check it out!
       </div>
   <h1 class="text-center">Affiliate Program</h1>
@@ -106,15 +106,15 @@
   <p class="note text-center">Please note: You can only join the affiliate program after purchasing our Affiliate Course on the platform.</p>
   <form action="#" method="post">
     <div class="mb-3">
-      <input type="text" class="form-control" name="fullname" placeholder="Full Name" required>
+      <input type="text" class="form-control"  id="fullname" name="fullname" placeholder="Full Name" required>
     </div>
     <div class="mb-3">
-      <input type="email" class="form-control" name="email" placeholder="Email Address" required>
+      <input type="email" class="form-control" id="email" name="email" placeholder="Email Address" required>
     </div>
     <div class="mb-3">
       <input type="text" class="form-control" name="website" placeholder="Website (Optional)">
     </div>
-    <button type="submit" class="btn btn-primary btn-block">Join Now</button>
+    <button type="button" class="btn btn-primary btn-block">Join Now</button>
   </form>
 </div>
 
@@ -139,17 +139,39 @@
     const db = getDatabase();
     const dbref = ref(db);
     const credential = JSON.parse(localStorage.getItem('credential'));
+    const email = document.getElementById('email');
+    const name = document.getElementById('fullname');
+    const alert = document.getElementById('alert');
+    const get_info = function () {
+  get(child(dbref, 'users/' + credential.user.uid)).then((snapshot) => {
+    if (snapshot.exists) {
+      // Check if email or name is empty
+      if (!email.value.trim() || !name.value.trim()) {
+        alert.innerText = 'Please fill out the form';
+        alert.style.display = 'block';
+        console.log(email.value);
+        console.log(name.value);
+        console.log('hello');
+      } else {
+        if (snapshot.val().courses.affiliate) {
+          console.log('py');
+          // Register affiliate
+        } else {
+          alert.innerText = 'You are not eligible to register';
+          alert.style.display = 'block';
+        }
+      }
+    } else {
+      // Handle case where snapshot doesn't exist
+      console.log("Snapshot doesn't exist");
+    }
+  }).catch((err) => {
+    // Handle errors
+    console.log(err.message);
+  });
+}
 
-  const get_info = get(child(dbref, 'users/' + credential.user.uid)).then((snapshot)=>{
-               if(snapshot.exists){
-                console.log(snapshot.val().courses.affiliate);
-             
-               }
-            }).catch((err)=>{
-              console.log(err.message);
-            });
-    
- const join_button = document.querySelector('button[type="submit"]');
+ const join_button = document.querySelector('button[type="button"]');
  join_button.addEventListener('click', get_info);
     
   </script>
