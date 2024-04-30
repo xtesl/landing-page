@@ -10,11 +10,13 @@
   body {
     font-family: Arial, sans-serif;
     background-color: #f9f9f9;
-    padding-bottom: 50px;
+    padding-bottom: 120px; /* Increased padding to accommodate footer and alert */
+    position: relative; /* Added relative positioning */
   }
   
   .container {
     background-color: white;
+    padding-top: 120px; /* Adjusted padding for better spacing */
     border-radius: 10px;
     padding: 30px;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
@@ -62,19 +64,22 @@
   }
 
   .navbar {
-      background-color: #37517e;
-      padding: 10px 20px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
+    background-color: #37517e;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000; /* Ensure navbar is on top */
+  }
 
-    .navbar-brand {
-      color: white;
-      font-size: 24px;
-      text-decoration: none;
-    }
-
+  .navbar-brand {
+    color: white;
+    font-size: 24px;
+    text-decoration: none;
+  }
 
   /* Footer styles */
   .footer {
@@ -87,6 +92,18 @@
     bottom: 0;
     left: 0;
     box-sizing: border-box;
+    z-index: 1000; /* Ensure footer is on top */
+  }
+
+  /* Adjusted styles for the alert */
+  #alert {
+    position: fixed;
+    bottom: 80px; /* Adjusted bottom position */
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    max-width: 400px; /* Adjusted max-width */
+    z-index: 1000; /* Ensure alert is on top */
   }
 </style>
 </head>
@@ -96,31 +113,31 @@
           <img src="your-company-logo.png" alt="Company Logo" style="height: 40px;"> Company Name
         </a>
         <a href="index.html" class="home-link" style="color: white;">Home</a>
-      </div>
-<div class="container">
-    <div class="alert alert-danger" id="alert" style="display: none;" role="alert">
-        A simple danger alert—check it out!
-      </div>
-  <h1 class="text-center">Affiliate Program</h1>
-  <p class="text-center">Join our affiliate program and start earning commissions today!</p>
-  <p class="note text-center">Please note: You can only join the affiliate program after purchasing our Affiliate Course on the platform.</p>
-  <form action="#" method="post">
-    <div class="mb-3">
-      <input type="text" class="form-control"  id="fullname" name="fullname" placeholder="Full Name" required>
     </div>
-    <div class="mb-3">
-      <input type="email" class="form-control" id="email" name="email" placeholder="Email Address" required>
+    <div class="container" style="padding-top: 80px;"> <!-- Adjusted padding-top -->
+        <div class="alert alert-danger" id="alert" style="display: none;" role="alert">
+            A simple danger alert—check it out!
+        </div>
+        <h1 class="text-center">Affiliate Program</h1>
+        <p class="text-center">Join our affiliate program and start earning commissions today!</p>
+        <p class="note text-center">Please note: You can only join the affiliate program after purchasing our Affiliate Course on the platform.</p>
+        <form action="#" method="post">
+            <div class="mb-3">
+                <input type="text" class="form-control" id="fullname" name="fullname" placeholder="Full Name" required>
+            </div>
+            <div class="mb-3">
+                <input type="email" class="form-control" id="email" name="email" placeholder="Email Address" required>
+            </div>
+            <div class="mb-3">
+                <input type="text" class="form-control" name="website" placeholder="Website (Optional)">
+            </div>
+            <button type="button" class="btn btn-primary btn-block">Join Now</button>
+        </form>
     </div>
-    <div class="mb-3">
-      <input type="text" class="form-control" name="website" placeholder="Website (Optional)">
-    </div>
-    <button type="button" class="btn btn-primary btn-block">Join Now</button>
-  </form>
-</div>
 
-<footer class="footer">
-  <p style="color: white;">&copy; 2024 Greater Grace Institute. All rights reserved.</p>
-</footer>
+    <footer class="footer">
+        <p style="color: white;">&copy; 2024 Greater Grace Institute. All rights reserved.</p>
+    </footer>
 
 <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-app.js";
@@ -143,37 +160,36 @@
     const name = document.getElementById('fullname');
     const alert = document.getElementById('alert');
     const get_info = function () {
-  get(child(dbref, 'users/' + credential.user.uid)).then((snapshot) => {
-    if (snapshot.exists) {
-      // Check if email or name is empty
-      if (!email.value.trim() || !name.value.trim()) {
-        alert.innerText = 'Please fill out the form';
-        alert.style.display = 'block';
-        console.log(email.value);
-        console.log(name.value);
-        console.log('hello');
-      } else {
-        if (snapshot.val().courses.affiliate) {
-          console.log('py');
-          // Register affiliate
+      get(child(dbref, 'users/' + credential.user.uid)).then((snapshot) => {
+        if (snapshot.exists) {
+          // Check if email or name is empty
+          if (!email.value.trim() || !name.value.trim()) {
+            alert.innerText = 'Please fill out the form';
+            alert.style.display = 'block';
+            console.log(email.value);
+            console.log(name.value);
+            console.log('hello');
+          } else {
+            if (snapshot.val().courses.affiliate) {
+              console.log('py');
+              // Register affiliate
+            } else {
+              alert.innerText = 'You are not eligible to register';
+              alert.style.display = 'block';
+            }
+          }
         } else {
-          alert.innerText = 'You are not eligible to register';
-          alert.style.display = 'block';
+          // Handle case where snapshot doesn't exist
+          console.log("Snapshot doesn't exist");
         }
-      }
-    } else {
-      // Handle case where snapshot doesn't exist
-      console.log("Snapshot doesn't exist");
+      }).catch((err) => {
+        // Handle errors
+        console.log(err.message);
+      });
     }
-  }).catch((err) => {
-    // Handle errors
-    console.log(err.message);
-  });
-}
 
- const join_button = document.querySelector('button[type="button"]');
- join_button.addEventListener('click', get_info);
-    
-  </script>
+    const join_button = document.querySelector('button[type="button"]');
+    join_button.addEventListener('click', get_info);
+</script>
 </body>
 </html>
