@@ -165,6 +165,7 @@
         signInWithEmailAndPassword(auth, email.value.trim(), 
         password.value.trim())
         .then((credentials)=>{
+          localStorage.setItem('isLoggedIn', 'true');
           localStorage.setItem('credential', JSON.stringify(
             credentials
           ));
