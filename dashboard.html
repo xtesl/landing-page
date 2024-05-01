@@ -149,17 +149,6 @@ function goToCourse(title, imageSrc) {
  
   </script>
   <script>
-   
-// Sample course data
-const Courses = [
-    { title: "Virtual Pencil Art", description: "Learn to make beautiful and aesthetic pencil art using just your smartphone.", image: "https://drive.google.com/file/d/1fjqfNFSWZhKDdsifMtd3lbkspoCOHAXf/preview"
- ,price: '10.00', id:'affiliate', number: 5},
-    { title: "Blockchain Basics", description: "Understand blockchain technology and its applications.", image: "https://drive.google.com/file/d/1gzjKosP-m11yxCbHW71YOHlftuqoBRJJ/preview",
-price: '10.00', id: 'block'},
-    { title: "Cybersecurity Principles", description: "Protect systems and data from cyber threats.", image: "https://drive.google.com/file/d/1gzjKosP-m11yxCbHW71YOHlftuqoBRJJ/preview", 
-price: '10.00', id: 'cyber' }
-];
-
     window.onload = function(){
       const isLoggedIn = localStorage.getItem('isLoggedIn');
       const credential = localStorage.getItem('credential');
@@ -171,15 +160,87 @@ price: '10.00', id: 'cyber' }
   </script>
 
   <script>
+       
+// Sample course data
+const Courses = [
+    { title: "Virtual Pencil Art", modules: [
+    {
+        title: "Module 1",
+        video: {
+          title: "Video 1: Introduction to the Course",
+          link: "https://drive.google.com/file/d/1fjqfNFSWZhKDdsifMtd3lbkspoCOHAXf/preview",
+          description: "Learn How To Make Beautiful Pencil Art Virtually(1)"
+        }
+    
+      },
+      {
+        title: "Module 2",
+        video: {
+          title: "Video 1: Setting Up",
+          link: "https://drive.google.com/file/d/1Tdj4BuuWHUFsEU0yQRChvJww3nFk8k7X/preview",
+          description: "Learn How To Make Beautiful Pencil Art Virtually(2)"
+        }
+       
+      },
+
+      {
+        title: "Module 3",
+        video: {
+          title: "vide 2",
+          link: "https://drive.google.com/file/d/1UjqOrCvNae3WZa6wGT-xLBXRU2yRuND4/preview",
+          description: "Learn How To Make Beautiful Pencil Art Virtually(3)"
+        }
+      },
+
+      {
+        title: "Module 4",
+        video: {
+          title: 'vid 2',
+          link: 'https://drive.google.com/file/d/1JcUdnnZd2-Nk8MUwN64XTUZmQaMnYso-/preview',
+          description: "Use our suggested software to improve the quality and appearance of your virtual arts real quick."
+        }
+      },
+
+      {
+        title: "Module 5",
+        video: {
+          title: "vid 2",
+          link: "https://drive.google.com/file/d/1gzjKosP-m11yxCbHW71YOHlftuqoBRJJ/preview",
+          description: "Make precise adjusment to your art to improve visual quality."
+        
+      },
+    }
+    ],
+    materials: [
+      "Snapseed App",
+      "Photoroom AI Photo Editor",
+      "Photo Enhancer App",
+      "Fine App"
+  ],
+
+  links: {
+  0:"https://drive.google.com/file/d/1xY5qiOgLvgJtRHyyFziCY44iELo5LWKE/view?usp=drive_link",
+  1:"https://drive.google.com/file/d/1xf-uOtI7sSV6BQz38mrhz4gmsvLmNtzT/view?usp=drive_link",
+  2:"https://drive.google.com/file/d/1FQjnZUKxQJSCTDdnCVwM8TlOzFwR6QRN/view?usp=drive_link",
+  3:"https://drive.google.com/file/d/1Ias4Yk-nwX92QvP5-eT5yc-y-oiYu9cB/view?usp=sharing"
+  },
+    id: 'affiliate'
+},
+    { title: "Blockchain Basics", description: "Understand blockchain technology and its applications.", image: "https://drive.google.com/file/d/1gzjKosP-m11yxCbHW71YOHlftuqoBRJJ/preview",
+price: '10.00', id: 'block'},
+    { title: "Cybersecurity Principles", description: "Protect systems and data from cyber threats.", image: "https://drive.google.com/file/d/1gzjKosP-m11yxCbHW71YOHlftuqoBRJJ/preview", 
+price: '10.00', id: 'cyber' }
+];
              
 function goToCourse(title) {
     Courses.forEach(course=>{
         if(course.title === title){
+
     const courseDetailsJSON = JSON.stringify(course);
     localStorage.setItem('courseDetails', courseDetailsJSON);
+    window.location.href = 'course.html';
         }
 
-        window.location.href = 'course.html';
     });
 
     // Redirect to the course page or perform other actions

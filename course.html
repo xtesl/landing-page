@@ -79,6 +79,11 @@
       color: #1e2e42;
     }
 
+    .video-description {
+      color: #666;
+      font-size: 14px;
+    }
+
     .material-section {
       background-color: #f0f0f0;
       padding: 20px;
@@ -189,8 +194,8 @@
 <!-- Body -->
 
 <div class="container">
-  <!-- Single course will be dynamically added here -->
   <div class="module-grid" id="moduleGrid">
+    <!-- Module cards will be dynamically added here -->
   </div>
 </div>
 
@@ -207,37 +212,8 @@
 </div>
 
 <script>
-  // Sample JSON object containing course details
-  const courseDetails = {
-    title: "Course Title 1",
-    modules: [
-      {
-        title: "Module 1: Introduction",
-        videos: [
-          "https://drive.google.com/file/d/1gzjKosP-m11yxCbHW71YOHlftuqoBRJJ/preview", // Google Drive video link
-        ],
-        materials: [
-          "Module 1 Materials",
-          "Additional Resources"
-        ]
-      },
-      {
-        title: "Module 2: Getting Started",
-        videos: [
-          "https://drive.google.com/file/d/1gzjKosP-m11yxCbHW71YOHlftuqoBRJJ/preview", // Google Drive video link
-        ],
-        materials: [
-          "Module 2 Materials",
-          "Additional Resources"
-        ]
-      }
-    ],
-    materials: [
-      "Course Overview",
-      "Course Syllabus",
-      "Final Exam Guide"
-    ]
-  };
+ 
+  const course = JSON.parse(localStorage.getItem('courseDetails'));
 
   // Function to generate module cards
   function generateModuleCards(courseDetails) {
@@ -254,23 +230,27 @@
       const content = document.createElement("div");
       content.classList.add("module-content");
 
-      const videoList = document.createElement("ul");
-      videoList.classList.add("video-list");
-      module.videos.forEach(video => {
-        const listItem = document.createElement("li");
-        listItem.classList.add("video-item");
-        const videoContainer = document.createElement("div");
-        videoContainer.classList.add("video-container");
-        const videoIframe = document.createElement("iframe");
-        videoIframe.classList.add("video-iframe");
-        videoIframe.src = video;
-        videoIframe.allowfullscreen = true;
-        videoContainer.appendChild(videoIframe);
-        listItem.appendChild(videoContainer);
-        videoList.appendChild(listItem);
-      });
+      const videoItem = document.createElement("li");
+      videoItem.classList.add("video-item");
 
-      content.appendChild(videoList);
+      const videoContainer = document.createElement("div");
+      videoContainer.classList.add("video-container");
+
+      const videoIframe = document.createElement("iframe");
+      videoIframe.classList.add("video-iframe");
+      videoIframe.setAttribute('sandbox',"allow-same-origin allow-scripts")
+      videoIframe.src = module.video.link;
+      videoIframe.allowfullscreen = true;
+
+      const videoDescription = document.createElement("p");
+      videoDescription.classList.add("video-description");
+      videoDescription.textContent = module.video.description;
+
+      videoContainer.appendChild(videoIframe);
+      videoItem.appendChild(videoContainer);
+      videoItem.appendChild(videoDescription);
+
+      content.appendChild(videoItem);
 
       card.appendChild(title);
       card.appendChild(content);
@@ -282,22 +262,21 @@
   // Function to generate course materials
   function generateCourseMaterials(courseDetails) {
     const materialList = document.getElementById("materialList");
-
-    courseDetails.materials.forEach(material => {
+    const material_links = courseDetails.links;
+    courseDetails.materials.forEach((material, index) => {
       const listItem = document.createElement("li");
       listItem.classList.add("material-item");
       const link = document.createElement("a");
       link.classList.add("material-link");
-      link.href = "#";
+      link.href = material_links[index];
       link.textContent = material;
       listItem.appendChild(link);
       materialList.appendChild(listItem);
     });
   }
-
   // Generate module cards and course materials
-  generateModuleCards(courseDetails);
-  generateCourseMaterials(courseDetails);
+  generateModuleCards(course);
+  generateCourseMaterials(course);
 </script>
 
 </body>
