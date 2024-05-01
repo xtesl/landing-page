@@ -7,50 +7,50 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
   <link rel="stylesheet" href="assets/css/dashboard.css">
   <style>
-  .modal {
-    display: none;
-    position: fixed;
-    z-index: 1;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-    background-color: rgb(0,0,0);
-    background-color: rgba(0,0,0,0.4);
-  }
+    .modal {
+      display: none; /* Hidden by default */
+      position: fixed; /* Stay in place */
+      z-index: 1; /* Sit on top */
+      left: 0;
+      top: 0;
+      width: 100%; /* Full width */
+      height: 100%; /* Full height */
+      overflow: auto; /* Enable scroll if needed */
+      background-color: rgb(0,0,0); /* Fallback color */
+      background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    }
 
-  .modal-content {
-    background-color: #fefefe;
-    margin: 15% auto;
-    padding: 20px;
-    border: 1px solid #888;
-    width: 80%;
-    max-width: 500px; /* Set max width for responsiveness */
-    border-radius: 10px;
-    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-    animation: zoom 0.3s;
-  }
+    /* Modal Content/Box */
+    .modal-content {
+      background-color: #fefefe;
+      margin: 10% auto; /* 15% from the top and centered */
+      padding: 20px;
+      border: 1px solid #888;
+      width: 80%; /* Could be more or less, depending on screen size */
+      max-width: 500px; /* Maximum width */
+      animation: zoom 0.3s;
+    }
 
-  @keyframes zoom {
-    from {transform: scale(0)}
-    to {transform: scale(1)}
-  }
+    /* Add Animation */
+    @keyframes zoom {
+      from {transform: scale(0)} 
+      to {transform: scale(1)}
+    }
 
-  .close {
-    color: #aaa;
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
-  }
+    .close {
+      color: #aaaaaa;
+      float: right;
+      font-size: 28px;
+      font-weight: bold;
+    }
 
-  .close:hover,
-  .close:focus {
-    color: black;
-    text-decoration: none;
-    cursor: pointer;
-  }
-</style>
+    .close:hover,
+    .close:focus {
+      color: #000;
+      text-decoration: none;
+      cursor: pointer;
+    }
+  </style>
 </head>
 <body>
    
@@ -106,7 +106,48 @@
       <!-- Add more buttons for other platforms -->
     </div>
   </div>
+  
+<div class="footer">
+  <p>&copy; 2024 Greater Grace Institute. All rights reserved.</p>
+</div>
+  <script>
 
+        document.addEventListener("DOMContentLoaded", function() {
+      // Wait for content to load, add event listeners
+      const courseList = document.getElementById('courseList');
+      courseList.addEventListener('click', function(e) {
+        if (e.target && e.target.name === 'share-btn') {
+          openShareModal();
+        }
+      });
+    });
+
+    // Function to open the share modal
+    function openShareModal() {
+      document.getElementById('shareModal').style.display = 'block';
+    }
+
+    // Function to close the share modal
+    function closeShareModal() {
+      document.getElementById('shareModal').style.display = 'none';
+    }
+
+    // Function to share on WhatsApp
+    function shareOnWhatsApp() {
+      var message = "Course Title - Description of the course. URL of the course";
+      window.location.href = "https://wa.me/?text=Check%20out%20this%20amazing%20video!%20https://example.com/video123.html" + encodeURIComponent(message);
+      closeShareModal(); // Close modal after sharing
+    }
+
+    // Function to share on Facebook
+    function shareOnFacebook() {
+      var url = encodeURIComponent("URL of the course");
+      window.open("https://www.facebook.com/sharer/sharer.php?u=" + url, "_blank");
+      closeShareModal(); // Close modal after sharing
+    }
+
+
+  </script>
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-app.js";
     import { getDatabase, get, ref } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-database.js";
