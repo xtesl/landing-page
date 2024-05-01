@@ -2,10 +2,13 @@
 body {
   font-family: Arial, sans-serif;
   background-color: #f9f9f9;
+  margin: 0; /* Reset default margin */
+  padding-bottom: 70px; /* Add space for footer */
 }
 
 .container {
   padding-top: 20px;
+  padding-bottom: 20px; /* Add some padding at the bottom */
 }
 
 h3 {
@@ -15,6 +18,7 @@ h3 {
 .card {
   border: none;
   transition: transform 0.3s ease;
+  margin-bottom: 20px; /* Add margin between cards */
 }
 
 .card:hover {
@@ -34,6 +38,7 @@ h3 {
   .card {
     border: none;
     transition: transform 0.3s ease;
+    margin-bottom: 20px; /* Add margin between cards */
   }
 }
 
@@ -41,6 +46,7 @@ h3 {
   .card {
     border: none;
     transition: transform 0.3s ease;
+    margin-bottom: 20px; /* Add margin between cards */
   }
 }
 
@@ -48,6 +54,7 @@ h3 {
   .card {
     border: none;
     transition: transform 0.3s ease;
+    margin-bottom: 20px; /* Add margin between cards */
   }
 }
 
@@ -55,20 +62,8 @@ h3 {
   .card {
     border: none;
     transition: transform 0.3s ease;
+    margin-bottom: 20px; /* Add margin between cards */
   }
-}
-
-
-
-
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-body {
-  font-family: Arial, sans-serif;
 }
 
 .navbar {
@@ -80,19 +75,21 @@ body {
   align-items: center;
 }
 
-  /* Footer styles */
-  .footer {
-    background-color: #37517e;
-    color: white;
-    padding: 20px;
-    text-align: center;
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-    left: 0;
-  }
 
-  /* Adjusted footer text size */
-  .footer p {
-    font-size: 14px;
-  }
+/* Footer styles */
+.footer {
+  background-color: #37517e;
+  color: white;
+  padding: 20px;
+  text-align: center;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  left: 0;
+  box-sizing: border-box; /* Ensure padding and border don't increase width */
+}
+
+/* Adjusted footer text size */
+.footer p {
+  font-size: 14px;
+}

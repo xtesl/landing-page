@@ -11,7 +11,7 @@
    
   <!-- Navbar -->
     
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="color:  #37517e;">
     <div class="container-fluid">
       <div class="navbar-brand light">Dashboard</div>
       <div class="navbar-brand light"  id="amount"></div>
@@ -75,19 +75,34 @@
     const credential = JSON.parse(localStorage.getItem('credential'));
     const courseList = document.getElementById('courseList');
 
+    
+// Sample course data
+const platformCourses = [
+    { title: "Virtual Pencil Art", description: "Learn to make beautiful and aesthetic pencil art using just your smartphone.", image: "https://drive.google.com/file/d/1fjqfNFSWZhKDdsifMtd3lbkspoCOHAXf/preview"
+ ,price: '10.00', id:'affiliate'},
+    { title: "Blockchain Basics", description: "Understand blockchain technology and its applications.", image: "https://drive.google.com/file/d/1gzjKosP-m11yxCbHW71YOHlftuqoBRJJ/preview",
+price: '10.00', id: 'block'},
+    { title: "Cybersecurity Principles", description: "Protect systems and data from cyber threats.", image: "https://drive.google.com/file/d/1gzjKosP-m11yxCbHW71YOHlftuqoBRJJ/preview", 
+price: '10.00', id: 'cyber' }
+];
+
     get(ref(db, 'users/' + credential.user.uid)).then((snapshot) => {
       if (snapshot.exists()) {
         
-        const courses = snapshot.val().courses;
-        if (courses) {
-          for (const courseId in courses) {
-            const course = courses[courseId];
-            const courseCard = `
+        const myCourses = snapshot.val().courses
+        
+        if (myCourses) {
+          for (const courseId in myCourses) {
+            platformCourses.forEach(course =>{
+              console.log(course.id, courseId)
+              if(courseId === course.id){
+                console.log('jel');
+                const courseCard = `
               <div class="col">
                 <div class="card h-100">
                   <div class="card-body">
                     <h5 class="card-title">${course.title}</h5>
-                    <p class="card-text">${course.description}</p>
+                    <iframe class="card-text" src="${course.image}"></iframe>
                   </div>
                   <div class="card-footer">
                     <a href="#" class="btn btn-primary">Go to Course</a>
@@ -96,6 +111,10 @@
               </div>
             `;
             courseList.innerHTML += courseCard;
+              }
+            });
+            
+           
           }
         } else {
           courseList.innerHTML = '<p>No courses available</p>';
