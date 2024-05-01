@@ -16,21 +16,22 @@
 
     .container {
       padding: 20px;
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
     }
 
-    .course {
-      width: 350px;
-      margin: 20px;
+    .module-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+    }
+
+    .module-card {
       border: 1px solid #ddd;
       border-radius: 10px;
       overflow: hidden;
       box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     }
 
-    .course-title {
+    .module-title {
       background-color: #37517e;
       color: #fff;
       padding: 15px;
@@ -39,15 +40,23 @@
       margin-bottom: 0;
     }
 
-    .module {
+    .module-content {
       background-color: #fff;
       padding: 20px;
     }
 
-    .module-title {
-      color: #37517e;
-      font-size: 20px;
-      margin-bottom: 15px;
+    .video-container {
+      position: relative;
+      width: 100%;
+      padding-top: 56.25%; /* 16:9 aspect ratio */
+    }
+
+    .video-iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
     }
 
     .video-list {
@@ -71,24 +80,37 @@
     }
 
     .material-section {
-      background-color: #f9f9f9;
+      background-color: #f0f0f0;
       padding: 20px;
+      margin-top: 40px;
     }
 
     .material-title {
       color: #37517e;
-      font-size: 20px;
+      font-size: 24px;
       margin-bottom: 15px;
+      text-align: center;
     }
 
     .material-list {
       list-style: none;
       padding: 0;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
     }
 
     .material-item {
-      padding: 10px 0;
-      border-bottom: 1px solid #ddd;
+      padding: 10px 20px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      margin: 10px;
+      background-color: #fff;
+      transition: box-shadow 0.3s;
+    }
+
+    .material-item:hover {
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     }
 
     .material-link {
@@ -99,12 +121,6 @@
 
     .material-link:hover {
       color: #1e2e42;
-    }
-
-    @media (max-width: 576px) {
-      .course {
-        width: calc(100% - 40px);
-      }
     }
 
     .navbar {
@@ -172,8 +188,18 @@
 <!-- End navbar -->
 <!-- Body -->
 
-<div class="container" id="courseList">
-  <!-- Courses will be dynamically added here -->
+<div class="container">
+  <!-- Single course will be dynamically added here -->
+  <div class="module-grid" id="moduleGrid">
+  </div>
+</div>
+
+<!-- Course materials section -->
+<div class="material-section">
+  <h2 class="material-title">Course Materials</h2>
+  <ul class="material-list" id="materialList">
+    <!-- Course materials will be dynamically added here -->
+  </ul>
 </div>
 
 <div class="footer">
@@ -182,112 +208,96 @@
 
 <script>
   // Sample JSON object containing course details
-  const coursesDetails = [
-    {
-      title: "Course Title 1",
-      modules: [
-        {
-          title: "Module 1: Introduction",
-          videos: [
-            "Video 1: Introduction to the Course",
-            "Video 2: Course Overview"
-          ]
-        },
-        {
-          title: "Module 2: Getting Started",
-          videos: [
-            "Video 1: Setting Up",
-            "Video 2: Basic Concepts"
-          ]
-        }
-      ],
-      materials: [
-        "Module 1 Materials",
-        "Module 2 Materials",
-        "Additional Resources"
-      ]
-    },
-    {
-      title: "Course Title 2",
-      modules: [
-        {
-          title: "Module 1: Introduction",
-          videos: [
-            "Video 1: Introduction to the Course",
-            "Video 2: Course Overview"
-          ]
-        },
-        {
-          title: "Module 2: Getting Started",
-          videos: [
-            "Video 1: Setting Up",
-            "Video 2: Basic Concepts"
-          ]
-        }
-      ],
-      materials: [
-        "Module 1 Materials",
-        "Module 2 Materials",
-        "Additional Resources"
-      ]
-    }
-    // Add more courses as needed
-  ];
+  const courseDetails = {
+    title: "Course Title 1",
+    modules: [
+      {
+        title: "Module 1: Introduction",
+        videos: [
+          "https://drive.google.com/file/d/1gzjKosP-m11yxCbHW71YOHlftuqoBRJJ/preview", // Google Drive video link
+        ],
+        materials: [
+          "Module 1 Materials",
+          "Additional Resources"
+        ]
+      },
+      {
+        title: "Module 2: Getting Started",
+        videos: [
+          "https://drive.google.com/file/d/1gzjKosP-m11yxCbHW71YOHlftuqoBRJJ/preview", // Google Drive video link
+        ],
+        materials: [
+          "Module 2 Materials",
+          "Additional Resources"
+        ]
+      }
+    ],
+    materials: [
+      "Course Overview",
+      "Course Syllabus",
+      "Final Exam Guide"
+    ]
+  };
 
-  // Function to generate HTML for course modules
-  function generateModules(modules) {
-    let html = "";
-    modules.forEach(module => {
-      html += `
-        <div class="module">
-          <h3 class="module-title">${module.title}</h3>
-          <ul class="video-list">
-      `;
+  // Function to generate module cards
+  function generateModuleCards(courseDetails) {
+    const moduleGrid = document.getElementById("moduleGrid");
+
+    courseDetails.modules.forEach(module => {
+      const card = document.createElement("div");
+      card.classList.add("module-card");
+
+      const title = document.createElement("h2");
+      title.classList.add("module-title");
+      title.textContent = module.title;
+
+      const content = document.createElement("div");
+      content.classList.add("module-content");
+
+      const videoList = document.createElement("ul");
+      videoList.classList.add("video-list");
       module.videos.forEach(video => {
-        html += `<li class="video-item">${video}</li>`;
+        const listItem = document.createElement("li");
+        listItem.classList.add("video-item");
+        const videoContainer = document.createElement("div");
+        videoContainer.classList.add("video-container");
+        const videoIframe = document.createElement("iframe");
+        videoIframe.classList.add("video-iframe");
+        videoIframe.src = video;
+        videoIframe.allowfullscreen = true;
+        videoContainer.appendChild(videoIframe);
+        listItem.appendChild(videoContainer);
+        videoList.appendChild(listItem);
       });
-      html += `
-          </ul>
-        </div>
-      `;
+
+      content.appendChild(videoList);
+
+      card.appendChild(title);
+      card.appendChild(content);
+
+      moduleGrid.appendChild(card);
     });
-    return html;
   }
 
-  // Function to generate HTML for course materials
-  function generateMaterials(materials) {
-    let html = `
-      <div class="material-section">
-        <h3 class="material-title">Course Materials</h3>
-        <ul class="material-list">
-    `;
-    materials.forEach(material => {
-      html += `<li class="material-item">${material}</li>`;
+  // Function to generate course materials
+  function generateCourseMaterials(courseDetails) {
+    const materialList = document.getElementById("materialList");
+
+    courseDetails.materials.forEach(material => {
+      const listItem = document.createElement("li");
+      listItem.classList.add("material-item");
+      const link = document.createElement("a");
+      link.classList.add("material-link");
+      link.href = "#";
+      link.textContent = material;
+      listItem.appendChild(link);
+      materialList.appendChild(listItem);
     });
-    html += `
-        </ul>
-      </div>
-    `;
-    return html;
   }
 
-  // Function to generate HTML for a course card
-  function generateCourseCard(course) {
-    return `
-      <div class="course">
-        <h2 class="course-title">${course.title}</h2>
-        ${generateModules(course.modules)}
-        ${generateMaterials(course.materials)}
-      </div>
-    `;
-  }
-
-  // Dynamically generate course cards
-  const courseList = document.getElementById("courseList");
-  coursesDetails.forEach(course => {
-    const courseCard = generateCourseCard(course);
-    courseList.innerHTML += courseCard;
-  });
+  // Generate module cards and course materials
+  generateModuleCards(courseDetails);
+  generateCourseMaterials(courseDetails);
 </script>
 
 </body>
