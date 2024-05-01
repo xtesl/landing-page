@@ -49,8 +49,12 @@
             </div>
             <div class="payment-info">
                 <p>Please send the total amount to: <strong>+233537204692</strong></p>
-                <p>After completing the payment, upload a screenshot and click below to finish:</p>
-                <input type="file" id="paymentScreenshot" accept="image/*">
+                <p>Name: Obeng Richmond</p>
+                <p>After completing the payment, screenshot and click below to notify us.</p>
+                <p>Please make sure to include the screenshot in your message before sending.</p>
+                <p>Our customer service will validate your payment and grant you access to the course.</p>
+                <p>After that your course will reflect on the dashboard.</p>
+                <p>Thank you for purchasing!</p>
                 <button type="button" class="payment-btn" onclick="finishPayment()">Finish Payment</button>
             </div>
         </form>
@@ -62,9 +66,9 @@
 
     <script src="assets/js/enroll.js"></script>
     <script>
-        //Course meta data
+
         const course = JSON.parse(localStorage.getItem('course'));
-        
+  
         //If No data to display redirect user back
         if(!course){
             window.location.href = 'course_marketplace.html';
@@ -75,6 +79,8 @@
         const courseSubTitle_1 = document.getElementById('course-title-1');
         const courseDesc = document.getElementById('courseDesc');
         const courseCover = document.getElementById('course-cover');
+        const email = document.getElementById('email');
+        const name = document.getElementById('fullname');
 
         const totalprice = document.getElementById('totalPrice');
 
@@ -82,9 +88,32 @@
         courseSubTitle_1.innerText = `${course.title}`;
         courseDesc.innerText = `${course.description}`;
         courseCover.setAttribute('src', course.image);
+
         
         //set course price
         totalprice.value = `GH₵${course.price}`;
+
+               
+function finishPayment() {
+            // Replace '1234567890' with your actual phone number
+            const phoneNumber = '233556373440';
+
+            if(!name.value.trim() || !email.value.trim()){
+                return;
+            }
+            
+            // Replace 'Hello, I bought product X!' with your desired message
+            const message = encodeURIComponent(
+                'Hello, I bought product ' + course.title + '!' + ' This is my email: ' + 
+                email.value.trim()
+        );
+
+            // Generate the WhatsApp link
+            const whatsappLink = `https://wa.me/${phoneNumber}?text=${message}`;
+
+            // Open WhatsApp with the pre-filled message
+            window.open(whatsappLink);
+        }
 
     </script>
 </body>
