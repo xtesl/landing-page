@@ -96,6 +96,17 @@
   </div>
   <!-- End Body -->
 
+   <!-- Modal -->
+   <div id="shareModal" class="modal" style="display: none;">
+    <div class="modal-content">
+      <span class="close" onclick="closeShareModal()">&times;</span>
+      <p>Select platform to share:</p>
+      <button class="share-button" onclick="shareOnWhatsApp()">WhatsApp</button>
+      <button class="share-button" onclick="shareOnFacebook()">Facebook</button>
+      <!-- Add more buttons for other platforms -->
+    </div>
+  </div>
+
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-app.js";
     import { getDatabase, get, ref } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-database.js";
