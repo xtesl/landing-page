@@ -96,51 +96,6 @@
   </div>
   <!-- End Body -->
 
-  <div id="shareModal" class="modal">
-    <div class="modal-content">
-      <span class="close" onclick="closeShareModal()">&times;</span>
-      <p>Select platform to share:</p>
-      <button onclick="shareOnWhatsApp()">WhatsApp</button>
-      <button onclick="shareOnFacebook()">Facebook</button>
-      <!-- Add more buttons for other platforms -->
-    </div>
-  </div>
-
-
-  <!-- Footer -->
-  <div class="footer">
-    <p>&copy; 2024 Greater Grace Institute. All rights reserved.</p>
-  </div>
-  <script>
-    // Function to open the share modal
-    function openShareModal() {
-      document.getElementById('shareModal').style.display = 'block';
-    }
-
-    // Function to close the share modal
-    function closeShareModal() {
-      document.getElementById('shareModal').style.display = 'none';
-    }
-
-    // Function to share on WhatsApp
-    function shareOnWhatsApp() {
-      var message = "Course Title - Description of the course. URL of the course";
-      window.location.href = "whatsapp://send?text=" + encodeURIComponent(message);
-      closeShareModal(); // Close modal after sharing
-    }
-
-    // Function to share on Facebook
-    function shareOnFacebook() {
-      var url = encodeURIComponent("URL of the course");
-      window.open("https://www.facebook.com/sharer/sharer.php?u=" + url, "_blank");
-      closeShareModal(); // Close modal after sharing
-    }
-
-    const shareBtn = document.getElementsByName('share-btn');
-    for(const button in shareBtn){
-      addEventListener('click', openShareModal);
-    }
-  </script>
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-app.js";
     import { getDatabase, get, ref } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-database.js";
