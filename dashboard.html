@@ -78,12 +78,10 @@
     
 // Sample course data
 const platformCourses = [
-    { title: "Virtual Pencil Art", description: "Learn to make beautiful and aesthetic pencil art using just your smartphone.", image: "https://drive.google.com/file/d/1fjqfNFSWZhKDdsifMtd3lbkspoCOHAXf/preview"
- ,price: '10.00', id:'affiliate', number: 5},
-    { title: "Blockchain Basics", description: "Understand blockchain technology and its applications.", image: "https://drive.google.com/file/d/1gzjKosP-m11yxCbHW71YOHlftuqoBRJJ/preview",
-price: '10.00', id: 'block'},
-    { title: "Cybersecurity Principles", description: "Protect systems and data from cyber threats.", image: "https://drive.google.com/file/d/1gzjKosP-m11yxCbHW71YOHlftuqoBRJJ/preview", 
-price: '10.00', id: 'cyber' }
+    { title: "Virtual Pencil Art", image: "https://drive.google.com/file/d/1fjqfNFSWZhKDdsifMtd3lbkspoCOHAXf/preview"
+ ,id:'pencilart'},
+    { title: "Affiliate Marketing", image: "https://drive.google.com/file/d/1SS9Jabqst-cSKm0kX66d09qeBxR7WapL/preview", 
+    id: 'affiliate'},
 ];
 
    
@@ -113,7 +111,6 @@ function goToCourse(title, imageSrc) {
         if (myCourses) {
           for (const courseId in myCourses) {
             platformCourses.forEach(course =>{
-              console.log(course.id, courseId)
               if(courseId === course.id){
                 console.log('jel');
                 const courseCard = `
@@ -223,17 +220,43 @@ const Courses = [
   1:"https://drive.google.com/file/d/1xf-uOtI7sSV6BQz38mrhz4gmsvLmNtzT/view?usp=drive_link",
   2:"https://drive.google.com/file/d/1FQjnZUKxQJSCTDdnCVwM8TlOzFwR6QRN/view?usp=drive_link",
   3:"https://drive.google.com/file/d/1Ias4Yk-nwX92QvP5-eT5yc-y-oiYu9cB/view?usp=sharing"
-  },
-    id: 'affiliate'
+  }
 },
-    { title: "Blockchain Basics", description: "Understand blockchain technology and its applications.", image: "https://drive.google.com/file/d/1gzjKosP-m11yxCbHW71YOHlftuqoBRJJ/preview",
-price: '10.00', id: 'block'},
-    { title: "Cybersecurity Principles", description: "Protect systems and data from cyber threats.", image: "https://drive.google.com/file/d/1gzjKosP-m11yxCbHW71YOHlftuqoBRJJ/preview", 
-price: '10.00', id: 'cyber' }
+    { title: "Affiliate Marketing", modules: [
+      {
+        title: "Module 1",
+        video: {
+          title: "Video 1: Introduction to the Course",
+          link: "https://drive.google.com/file/d/1SS9Jabqst-cSKm0kX66d09qeBxR7WapL/preview",
+          description: "Learn affiliate marketing(1)"
+        }
+      },
+
+      {
+        title: "Module 2",
+        video: {
+          title: "vid 2",
+      link: "https://drive.google.com/file/d/1SewNYj4f9gljkKHEvQndd7Uybz3eq8E-/preview",
+          
+          description: "Learn affiliate marketing(2)"
+        }
+      },
+
+      {
+        title: "Module 3",
+        video: {
+          title: "vid 3",
+      link: "https://drive.google.com/file/d/1TDIpzg3hlYXNh_ps5g5sYc_xo8DT4qFf/preview",
+
+          description: "Learn affiliate marketing(3)"
+        }
+      }
+    ]},
 ];
              
 function goToCourse(title) {
     Courses.forEach(course=>{
+      console.log(course.title, title)
         if(course.title === title){
 
     const courseDetailsJSON = JSON.stringify(course);

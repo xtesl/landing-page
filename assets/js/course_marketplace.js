@@ -22,11 +22,9 @@ document.addEventListener('DOMContentLoaded', () => {
 // Sample course data
 const courses = [
     { title: "Virtual Pencil Art", description: "Learn to make beautiful and aesthetic pencil art using just your smartphone.", image: "https://drive.google.com/file/d/1fjqfNFSWZhKDdsifMtd3lbkspoCOHAXf/preview"
- ,price: '10.00'},
-    { title: "Blockchain Basics", description: "Understand blockchain technology and its applications.", image: "https://drive.google.com/file/d/1gzjKosP-m11yxCbHW71YOHlftuqoBRJJ/preview",
-price: '10.00'},
-    { title: "Cybersecurity Principles", description: "Protect systems and data from cyber threats.", image: "https://drive.google.com/file/d/1gzjKosP-m11yxCbHW71YOHlftuqoBRJJ/preview", 
-price: '10.00' }
+ ,price: '20.00'},
+    { title: "Affiliate Marketing", description: "Understand and develop your skills in affiliate marketing.", image: "https://drive.google.com/file/d/1SS9Jabqst-cSKm0kX66d09qeBxR7WapL/preview",
+price: '100.00'} 
 ];
 let currentPage = 1;
 const perPage = 6;
