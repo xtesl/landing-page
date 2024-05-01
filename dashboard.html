@@ -135,14 +135,15 @@
     // Function to share on WhatsApp
     function shareOnWhatsApp() {
       var message = "Course Title - Description of the course. URL of the course";
-      window.location.href = "https://wa.me/?text=Check%20out%20this%20amazing%20video!%20https://example.com/video123.html" + encodeURIComponent(message);
+      window.location.href = "https://wa.me/?text=Check%20out%20this%20amazing%20video!%20https://greater-grace-institue.onrender.com/video123.html" + encodeURIComponent(message);
       closeShareModal(); // Close modal after sharing
     }
 
     // Function to share on Facebook
     function shareOnFacebook() {
       var url = encodeURIComponent("URL of the course");
-      window.open("https://www.facebook.com/sharer/sharer.php?u=" + url, "_blank");
+
+      window.open("https://www.facebook.com/sharer/sharer.php?u=" + "https%3A%2F%2Fexample.com%2Fvideo123.html", "_blank");
       closeShareModal(); // Close modal after sharing
     }
 
