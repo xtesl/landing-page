@@ -121,19 +121,25 @@ function goToCourse(title, imageSrc) {
                 console.log('jel');
                 const courseCard = `
                 <div class="col">
-          <div class="card h-100">
-    <div class="card-body">
-      <h5 class="card-title">${course.title}</h5>
-      <div class="video-container">
-        <iframe class="video-iframe" src="${course.image}" allowfullscreen></iframe>
-        <div class="video-overlay"></div> <!-- Overlay for the video -->
-      </div>
+    <div class="card h-100">
+        <div class="card-body">
+            <h5 class="card-title">${course.title}</h5>
+            <div class="video-container">
+                <iframe class="video-iframe" src="${course.image}" allowfullscreen></iframe>
+                <div class="video-overlay"></div> <!-- Overlay for the video -->
+            </div>
+        </div>
+        <div class="card-footer d-flex justify-content-between align-items-center">
+            <div>
+                <button class="btn btn-primary" onclick="goToCourse('${course.title}')">Go to Course</button>
+            </div>
+            <div>
+                <button class="btn btn-secondary">Share</button>
+            </div>
+        </div>
     </div>
-    <div class="card-footer">
-      <a href="#" onclick="goToCourse('${course.title}')" class="btn btn-primary">Go to Course</a>
-    </div>
-  </div>
 </div>
+
             
 `;
      courseList.innerHTML += courseCard;

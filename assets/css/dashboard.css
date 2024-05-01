@@ -33,6 +33,9 @@ h3 {
 .card-footer {
   background-color: #f9f9f9;
   border-top: none;
+  display: flex; /* Use flexbox for layout */
+  justify-content: space-between; /* Distribute items evenly */
+  align-items: center; /* Align items vertically */
 }
 
 .video-container {
@@ -58,7 +61,6 @@ h3 {
   opacity: 0; /* Initially hidden */
   transition: opacity 0.3s ease;
 }
-
 
 .navbar {
   background: linear-gradient(135deg, #37517e, #3a7bd5); /* Gradient background */
