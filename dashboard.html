@@ -74,6 +74,7 @@
     const dbref = ref(db);
     const credential = JSON.parse(localStorage.getItem('credential'));
     const courseList = document.getElementById('courseList');
+    const amount = document.getElementById('amount');
 
     
 // Sample course data
@@ -105,6 +106,11 @@ function goToCourse(title, imageSrc) {
 
     get(ref(db, 'users/' + credential.user.uid)).then((snapshot) => {
       if (snapshot.exists()) {
+
+        if(snapshot.val().affiliate){
+          amount.innerText = `$${snapshot.val().amount}.00`;
+          document.getElementById('withdraw').style.display = 'block';
+        }
         
         const myCourses = snapshot.val().courses
         
