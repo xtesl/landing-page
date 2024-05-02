@@ -8,49 +8,66 @@
   <link rel="stylesheet" href="assets/css/dashboard.css">
   <style>
     .modal {
-      display: none; /* Hidden by default */
-      position: fixed; /* Stay in place */
-      z-index: 1; /* Sit on top */
-      left: 0;
-      top: 0;
-      width: 100%; /* Full width */
-      height: 100%; /* Full height */
-      overflow: auto; /* Enable scroll if needed */
-      background-color: rgb(0,0,0); /* Fallback color */
-      background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+        display: none;
+        position: fixed;
+        z-index: 1;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgba(0,0,0,0.4);
     }
 
-    /* Modal Content/Box */
     .modal-content {
-      background-color: #fefefe;
-      margin: 10% auto; /* 15% from the top and centered */
-      padding: 20px;
-      border: 1px solid #888;
-      width: 80%; /* Could be more or less, depending on screen size */
-      max-width: 500px; /* Maximum width */
-      animation: zoom 0.3s;
-    }
-
-    /* Add Animation */
-    @keyframes zoom {
-      from {transform: scale(0)} 
-      to {transform: scale(1)}
+        background-color: white;
+        margin: 20% auto;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        max-width: 300px;
+        text-align: center;
     }
 
     .close {
-      color: #aaaaaa;
-      float: right;
-      font-size: 28px;
-      font-weight: bold;
+        color: #aaa;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
     }
 
     .close:hover,
     .close:focus {
-      color: #000;
-      text-decoration: none;
-      cursor: pointer;
+        color: black;
+        text-decoration: none;
+        cursor: pointer;
     }
-  </style>
+
+    .share-button {
+        display: block;
+        width: 100%;
+        margin-top: 10px;
+        padding: 10px;
+        background-color: #37517e;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        text-align: center;
+        text-decoration: none;
+    }
+
+    .share-button:hover {
+        background-color: #1e3a5c;
+    }
+
+    .share-icon {
+        width: 20px;
+        height: 20px;
+        margin-right: 5px;
+        vertical-align: middle;
+    }
+</style>
+
 </head>
 <body>
    
@@ -95,17 +112,26 @@
     </div>
   </div>
   <!-- End Body -->
-
-   <!-- Modal -->
-   <div id="shareModal" class="modal" style="display: none;">
-    <div class="modal-content">
+ 
+<!-- Modal -->
+<div id="shareModal" class="modal">
+  <div class="modal-content">
       <span class="close" onclick="closeShareModal()">&times;</span>
       <p>Select platform to share:</p>
-      <button class="share-button" onclick="shareOnWhatsApp()">WhatsApp</button>
-      <button class="share-button" onclick="shareOnFacebook()">Facebook</button>
+      <!-- WhatsApp share button -->
+      <a id="whatsappLink" class="share-button" target="_blank" href="#"> <!-- Empty href for now -->
+          <img class="share-icon" src="assets/img/whatsapp.png" alt="WhatsApp icon">
+          Share on WhatsApp
+      </a>
+      <!-- Facebook share button -->
+      <a id="facebookLink" class="share-button" target="_blank" href="#"> <!-- Empty href for now -->
+          <img class="share-icon" src="assets/img/facebook.png" alt="Facebook icon">
+          Share on Facebook
+      </a>
       <!-- Add more buttons for other platforms -->
-    </div>
   </div>
+</div>
+
   
 <div class="footer">
   <p>&copy; 2024 Greater Grace Institute. All rights reserved.</p>
@@ -117,14 +143,22 @@
       const courseList = document.getElementById('courseList');
       courseList.addEventListener('click', function(e) {
         if (e.target && e.target.name === 'share-btn') {
-          openShareModal();
+          
+          openShareModal(e.target.dataset.title);
         }
       });
     });
 
-    // Function to open the share modal
-    function openShareModal() {
-      document.getElementById('shareModal').style.display = 'block';
+    function openShareModal(videoTitle) {
+        // Generate the video URL with query parameter
+        const videoURL = `https://greater-grace-institute.onrender.com/vid?title=${encodeURIComponent(videoTitle)}`;
+
+        // Set the href attribute of WhatsApp and Facebook links
+        document.getElementById('whatsappLink').href = `https://wa.me/?text=Check%20out%20this%20amazing%20course!%20${encodeURIComponent(videoURL)}`;
+        document.getElementById('facebookLink').href = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(videoURL)}&quote=${encodeURIComponent(videoTitle)}`;
+
+        // Display the modal
+        document.getElementById('shareModal').style.display = 'block';
     }
 
     // Function to close the share modal
@@ -132,20 +166,6 @@
       document.getElementById('shareModal').style.display = 'none';
     }
 
-    // Function to share on WhatsApp
-    function shareOnWhatsApp() {
-      var message = "Course Title - Description of the course. URL of the course";
-      window.location.href = "https://wa.me/?text=Check%20out%20this%20amazing%20video!%20https://greater-grace-institue.onrender.com/video123.html" + encodeURIComponent(message);
-      closeShareModal(); // Close modal after sharing
-    }
-
-    // Function to share on Facebook
-    function shareOnFacebook() {
-      var url = encodeURIComponent("URL of the course");
-
-      window.open("https://www.facebook.com/sharer/sharer.php?u=" + "https%3A%2F%2Fexample.com%2Fvideo123.html", "_blank");
-      closeShareModal(); // Close modal after sharing
-    }
 
 
   </script>
@@ -227,7 +247,7 @@ function goToCourse(title, imageSrc) {
                 <button class="btn btn-primary" onclick="goToCourse('${course.title}')">Go to Course</button>
             </div>
             <div>
-                <button class="btn btn-secondary" name='share-btn' style="background-color: #37517e">Share</button>
+                <button class="btn btn-secondary" name='share-btn' data-title="${course.title}" style="background-color: #37517e">Share</button>
             </div>
         </div>
     </div>
