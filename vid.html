@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Filtered Video</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <style>
+    /* Primary Colors */
+    :root {
+      --primary-color: #37517e;
+      --secondary-color: #ffffff;
+    }
+
+    body {
+      background-color: var(--primary-color);
+      color: var(--secondary-color);
+    }
+
+    /* Title and Description */
+    .title {
+      font-size: 2rem;
+      font-weight: bold;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .description {
+      font-size: 1.2rem;
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    /* Video Container */
+    .video-container {
+      position: relative;
+      width: 100%;
+      padding-top: 56.25%; /* 16:9 Aspect Ratio */
+    }
+
+    .video-iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+
+    /* Transparent Overlay */
+    .overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5); /* Transparent black */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    /* Overlay Content */
+    .overlay-content {
+      text-align: center;
+    }
+
+    /* Login/Sign up link */
+    .login-signup-link {
+      font-size: 1.2rem;
+      text-align: center;
+      display: block;
+      margin-top: 20px;
+      color: var(--secondary-color);
+    }
+
+    .login-signup-link:hover {
+      text-decoration: none;
+      color: var(--secondary-color);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container mt-5">
+    <h1 class="title">Let's Get You Started</h1>
+    <p class="description" id="description"></p>
+    <div class="row">
+      <div class="col-md-8 offset-md-2">
+        <div class="video-container">
+          <!-- Video iframe -->
+          <iframe id="videoFrame" class="video-iframe" src="" allowfullscreen></iframe>
+          <!-- Transparent overlay -->
+          <div class="overlay" id="overlay">
+            <div class="overlay-content">
+              <p id="courseNotFound" style="display: none;">Course not found</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <a href="login.html" class="login-signup-link">Login or Sign Up</a>
+  </div>
+
+  <script>
+
+    // Predefined courses with their video IDs
+    const courses = {
+        "affiliate marketing": {
+            desc: "Learn Affiliate Marketing The Right Way And Earn!",
+    link: "https://drive.google.com/file/d/1SS9Jabqst-cSKm0kX66d09qeBxR7WapL/preview"
+        }
+    };
+
+    // Function to parse query parameters from URL
+    function getQueryParam(param) {
+      const urlParams = new URLSearchParams(window.location.search);
+      return urlParams.get(param);
+    }
+
+    // Function to update the video source based on the query parameter
+    function updateVideo() {
+      const title = getQueryParam('title');
+
+      // Check if title query parameter is provided
+      if (title && courses[title]) {
+        // Construct the Google Drive video link with the video ID
+        const videoLink = courses[title].link
+        // Update the source of the video iframe
+        document.getElementById('videoFrame').src = videoLink;
+        document.getElementById('description').innerText = courses[title].desc;
+        // Set the title on the page
+        document.title = `${title} - Video`;
+      } else {
+        // Display "Course not found" in the center of the video container
+        document.getElementById('overlay').style.backgroundColor = "transparent";
+        document.getElementById('courseNotFound').style.display = "block";
+      }
+    }
+
+    // Call the function to update the video source on page load
+    window.onload = function() {
+      updateVideo();
+    };
+  </script>
+</body>
+</html>
