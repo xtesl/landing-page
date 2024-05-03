@@ -74,6 +74,8 @@
         const amountPaid  = document.getElementById('amountPaid');
         const courseName = document.getElementById('course');
         const spinner = document.getElementById('spinner');
+        const result = document.getElementById('result');
+
         
         let getUser = evt => {
                 evt.preventDefault();
@@ -106,17 +108,26 @@
                             }).then(()=>{
 
                             }).catch((err)=>{
+                           result.innerText = 'Validation Failed'
+
                               console.log(err.message);
                             })
                             }
                          }).then(()=>{
-
+                           result.innerText = 'Validation Successful';
+                            
+                         }).catch((err)=>{
+                           result.innerText = 'Validation Failed';
                          })
                         }
                     }
+                    result.innerText = 'Validation Successful';
                 }).catch((err)=>{
+                  result.innerText = 'Validation Failed';
+                    
                     console.log(err.message);
                 }).finally(()=>{
+                   result.style.display = 'block'
                     spinner.style.display = 'none';
                 })
     
