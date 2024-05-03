@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', () => {
 // Sample course data
 const courses = [
     { title: "Virtual Pencil Art", description: "Learn to make beautiful and aesthetic pencil art using just your smartphone.", image: "https://drive.google.com/file/d/1fjqfNFSWZhKDdsifMtd3lbkspoCOHAXf/preview"
- ,price: '20.00'},
+ ,price: '60.00'},
     { title: "Affiliate Marketing", description: "Understand and develop your skills in affiliate marketing.", image: "https://drive.google.com/file/d/1SS9Jabqst-cSKm0kX66d09qeBxR7WapL/preview",
 price: '100.00'} 
 ];
@@ -105,7 +105,7 @@ function renderCoursesSpecific(coursesToRender) {
             <iframe src="${course.image}"></iframe>
             <div class="course-info">
                 <h3>${course.title}</h3>
-                <h1 style='display=none;'>${course.price}</h1>
+                <h1 style="display=none">${course.price}</h1>
                 <p>${course.description}</p>
                 <button class="btn">Enroll Now</button>
             </div>
