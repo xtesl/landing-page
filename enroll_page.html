@@ -68,9 +68,10 @@
     <script>
 
         const course = JSON.parse(localStorage.getItem('course'));
+        const credential = JSON.parse(localStorage.getItem('credential'));
   
         //If No data to display redirect user back
-        if(!course){
+        if(!course || !credential){
             window.location.href = 'course_marketplace.html';
         }
 
@@ -104,8 +105,8 @@ function finishPayment() {
             
             // Replace 'Hello, I bought product X!' with your desired message
             const message = encodeURIComponent(
-                'Hello, I bought product ' + course.title + '!' + ' This is my email: ' + 
-                email.value.trim()
+                'Hello, I bought product ' + course.title + '!' + ' This is my ID: ' + 
+                credential.user.uid
         );
 
             // Generate the WhatsApp link

@@ -215,7 +215,7 @@
   <!-- Firebase SDK CDN load -->
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-app.js";
-    import { getDatabase, set, ref } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-database.js";
+    import { getDatabase, set, ref, update, child } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-database.js";
     import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-auth.js";
 
     const firebaseConfig = {
@@ -242,6 +242,12 @@
     //Get database instance
     const db = getDatabase();
     const auth = getAuth(app);
+
+        // Function to parse query parameters from URL
+        function getQueryParam(param) {
+      const urlParams = new URLSearchParams(window.location.search);
+      return urlParams.get(param);
+    }
     
     let signUp = evt => {
             evt.preventDefault();
@@ -250,7 +256,7 @@
       createUserWithEmailAndPassword(auth, email.value.trim(), 
       password.value.trim())
       .then((credentials)=>{
-        set(ref(db, "users/" + credentials.user.uid), {
+        const data =  {
           firstname: firstname.value.trim(),
           lastname: lastname.value.trim(),
           phone: phone.value.trim(),
@@ -259,13 +265,15 @@
             placeholder: true
           },
           affiliate: false,
-          children: {
-            placeholder:true
-          },
           amount: 0.00
-         }).then(()=>{
-             
-         //Direct user to login page
+         }
+
+         const user = getQueryParam('user');
+         if (user){
+          data['father'] = user
+         }
+        set(ref(db, "users/" + credentials.user.uid), 
+       data).then(()=>{
         window.location.href = 'login.html';
          });
 
