@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enroll in Course</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="assets/css/enroll.css">
+</head>
+<body>
+    <nav class="navbar bg-blue">
+        <div class="container-fluid">
+          <a class="navbar-brand nav-logo">Enroll Now</a>
+          <form class="d-flex" role="search">
+            <button class="btn btn-light" ondblclick="window.history.back()" onclick="searchCourses()" type="button">Go Back</button>
+          </form>
+        </div>
+      </nav>
+
+    <div class="container">
+        <div class="course-description">
+            <h2 id="course-title"></h2>
+            <div class="course-card">
+                <div class="video-overlay"></div>
+                <iframe id="course-cover"></iframe>
+                <div class="course-info">
+                    <h3 id="course-title-1"></h3>
+                </div>
+            </div>
+            <p id="courseDesc"></p> <!-- Moved course description outside course-info -->
+        </div>
+        <div class="enroll-header">
+            <h1>Enroll in Course</h1>
+            <p>Complete the form below to enroll in this course</p>
+        </div>
+        <form action="#" method="POST" class="enroll-form">
+            <div class="form-group">
+                <label for="fullname">Full Name</label>
+                <input type="text" id="fullname" name="fullname" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email Address</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <div class="form-group">
+                <label>Total Course Price</label>
+                <input type="text" id="totalPrice" name="totalPrice" readonly>
+            </div>
+            <div class="payment-info">
+                <p>Please send the total amount to: <strong>+233537204692</strong></p>
+                <p>Name: Obeng Richmond</p>
+                <p>After completing the payment, screenshot and click below to notify us.</p>
+                <p>Please make sure to include the screenshot in your message before sending.</p>
+                <p>Our customer service will validate your payment and grant you access to the course.</p>
+                <p>After that your course will reflect on the dashboard.</p>
+                <p>Thank you for purchasing!</p>
+                <button type="button" class="payment-btn" onclick="finishPayment()">Finish Payment</button>
+            </div>
+        </form>
+    </div>
+     <!-- Footer -->
+  <div class="footer">
+    <p>&copy; 2024 Greater Grace Institute. All rights reserved.</p>
+  </div>
+
+    <script src="assets/js/enroll.js"></script>
+    <script>
+
+        const course = JSON.parse(localStorage.getItem('course'));
+        const credential = JSON.parse(localStorage.getItem('credential'));
+  
+        //If No data to display redirect user back
+        if(!course || !credential){
+            window.location.href = 'course_marketplace.html';
+        }
+
+        //Set course meta data
+        const courseTitle = document.getElementById('course-title');
+        const courseSubTitle_1 = document.getElementById('course-title-1');
+        const courseDesc = document.getElementById('courseDesc');
+        const courseCover = document.getElementById('course-cover');
+        const email = document.getElementById('email');
+        const name = document.getElementById('fullname');
+
+        const totalprice = document.getElementById('totalPrice');
+
+        courseTitle.innerText = ` Course: ${course.title}`;
+        courseSubTitle_1.innerText = `${course.title}`;
+        courseDesc.innerText = `${course.description}`;
+        courseCover.setAttribute('src', course.image);
+
+        
+        //set course price
+        totalprice.value = `GH₵${course.price}`;
+
+               
+function finishPayment() {
+            // Replace '1234567890' with your actual phone number
+            const phoneNumber = '233556373440';
+
+            if(!name.value.trim() || !email.value.trim()){
+                return;
+            }
+            
+            // Replace 'Hello, I bought product X!' with your desired message
+            const message = encodeURIComponent(
+                'Hello, I bought product ' + course.title + '!' + ' This is my ID: ' + 
+                credential.user.uid
+        );
+
+            // Generate the WhatsApp link
+            const whatsappLink = `https://wa.me/${phoneNumber}?text=${message}`;
+
+            // Open WhatsApp with the pre-filled message
+            window.open(whatsappLink);
+        }
+
+    </script>
+</body>
+</html>

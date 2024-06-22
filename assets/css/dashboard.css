@@ -1,0 +1,90 @@
+/* Updated CSS for responsiveness and style */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f9f9f9;
+  margin: 0; /* Reset default margin */
+  padding-bottom: 80px; /* Add space for footer */
+}
+
+.container {
+  padding-top: 20px;
+  padding-bottom: 20px; /* Add some padding at the bottom */
+}
+
+h3 {
+  color: #37517e;
+}
+
+.card {
+  position: relative;
+  border: none;
+  transition: transform 0.3s ease;
+  margin-bottom: 20px; /* Add margin between cards */
+}
+
+.card:hover {
+  transform: translateY(-5px);
+}
+
+.card-title {
+  color: #37517e;
+}
+
+.card-footer {
+  background-color: #f9f9f9;
+  border-top: none;
+  display: flex; /* Use flexbox for layout */
+  justify-content: space-between; /* Distribute items evenly */
+  align-items: center; /* Align items vertically */
+}
+
+.video-container {
+  position: relative;
+  width: 100%;
+  height: 0;
+  padding-bottom: 56.25%; /* 16:9 aspect ratio */
+}
+
+.video-iframe {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+.video-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black */
+  opacity: 0; /* Initially hidden */
+  transition: opacity 0.3s ease;
+}
+
+.navbar {
+  background: linear-gradient(135deg, #37517e, #3a7bd5); /* Gradient background */
+  color: white;
+  padding: 10px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Footer styles */
+.footer {
+  background-color: #37517e;
+  color: white;
+  padding: 20px;
+  text-align: center;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  left: 0;
+  box-sizing: border-box; /* Ensure padding and border don't increase width */
+}
+
+/* Adjusted footer text size */
+.footer p {
+  font-size: 14px;
+}

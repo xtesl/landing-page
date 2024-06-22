@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Courses</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f9f9f9;
+      margin: 0;
+      padding: 0;
+      padding-bottom: 70px;
+    }
+
+    .container {
+      padding: 20px;
+    }
+
+    .module-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+    }
+
+    .module-card {
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .module-title {
+      background-color: #37517e;
+      color: #fff;
+      padding: 15px;
+      font-size: 24px;
+      text-align: center;
+      margin-bottom: 0;
+    }
+
+    .module-content {
+      background-color: #fff;
+      padding: 20px;
+    }
+
+    .video-container {
+      position: relative;
+      width: 100%;
+      padding-top: 56.25%; /* 16:9 aspect ratio */
+    }
+
+    .video-iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+
+    .video-list {
+      list-style: none;
+      padding: 0;
+    }
+
+    .video-item {
+      padding: 10px 0;
+      border-bottom: 1px solid #ddd;
+    }
+
+    .video-link {
+      color: #37517e;
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+
+    .video-link:hover {
+      color: #1e2e42;
+    }
+
+    .video-description {
+      color: #666;
+      font-size: 14px;
+    }
+
+    .material-section {
+      background-color: #f0f0f0;
+      padding: 20px;
+      margin-top: 40px;
+    }
+
+    .material-title {
+      color: #37517e;
+      font-size: 24px;
+      margin-bottom: 15px;
+      text-align: center;
+    }
+
+    .material-list {
+      list-style: none;
+      padding: 0;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .material-item {
+      padding: 10px 20px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      margin: 10px;
+      background-color: #fff;
+      transition: box-shadow 0.3s;
+    }
+
+    .material-item:hover {
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .material-link {
+      color: #37517e;
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+
+    .material-link:hover {
+      color: #1e2e42;
+    }
+
+    .navbar {
+      background: linear-gradient(135deg, #37517e, #3a7bd5); /* Gradient background */
+      color: white;
+      display: flex;
+      justify-content: space-between;
+      padding: 10px 20px;
+      align-items: center;
+    }
+
+    .nav-logo {
+      font-size: 24px;
+      font-weight: bold;
+      color: white;
+    }
+
+    .nav-items .nav-item {
+      color: white;
+      text-decoration: none;
+      margin-left: 20px;
+      font-size: 16px;
+      padding: 5px 10px;
+      border-radius: 5px;
+    }
+
+    /* Footer styles */
+    .footer {
+      background-color: #37517e;
+      color: white;
+      padding: 20px;
+      text-align: center;
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      left: 0;
+    }
+
+    /* Adjusted footer text size */
+    .footer p {
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+      
+<nav class="navbar navbar-expand-lg ">
+  <div class="container-fluid">
+    <div class="navbar-brand light">Course</div>
+    <div class="navbar-brand light"  id="amount"></div>
+
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+      </ul>
+      <form class="d-flex">
+        <button type="button" onclick="window.location.href = 'index.html';" class="btn btn-light">Home</button>
+      </form>
+    </div>
+  </div>
+</nav>
+
+<!-- End navbar -->
+<!-- Body -->
+
+<div class="container">
+  <div class="module-grid" id="moduleGrid">
+    <!-- Module cards will be dynamically added here -->
+  </div>
+</div>
+
+<!-- Course materials section -->
+<div class="material-section">
+  <h2 class="material-title">Course Materials</h2>
+  <ul class="material-list" id="materialList">
+    <!-- Course materials will be dynamically added here -->
+  </ul>
+</div>
+
+<div class="footer">
+  <p>&copy; 2024 Greater Grace Institute. All rights reserved.</p>
+</div>
+
+<script>
+ 
+  const course = JSON.parse(localStorage.getItem('courseDetails'));
+
+  // Function to generate module cards
+  function generateModuleCards(courseDetails) {
+    const moduleGrid = document.getElementById("moduleGrid");
+
+    courseDetails.modules.forEach(module => {
+      const card = document.createElement("div");
+      card.classList.add("module-card");
+
+      const title = document.createElement("h2");
+      title.classList.add("module-title");
+      title.textContent = module.title;
+
+      const content = document.createElement("div");
+      content.classList.add("module-content");
+
+      const videoItem = document.createElement("li");
+      videoItem.classList.add("video-item");
+
+      const videoContainer = document.createElement("div");
+      videoContainer.classList.add("video-container");
+
+      const videoIframe = document.createElement("iframe");
+      videoIframe.classList.add("video-iframe");
+      videoIframe.setAttribute('sandbox',"allow-same-origin allow-scripts")
+      videoIframe.src = module.video.link;
+      videoIframe.allowfullscreen = true;
+
+      const videoDescription = document.createElement("p");
+      videoDescription.classList.add("video-description");
+      videoDescription.textContent = module.video.description;
+
+      videoContainer.appendChild(videoIframe);
+      videoItem.appendChild(videoContainer);
+      videoItem.appendChild(videoDescription);
+
+      content.appendChild(videoItem);
+
+      card.appendChild(title);
+      card.appendChild(content);
+
+      moduleGrid.appendChild(card);
+    });
+  }
+
+  // Function to generate course materials
+  function generateCourseMaterials(courseDetails) {
+    const materialList = document.getElementById("materialList");
+    const material_links = courseDetails.links;
+    courseDetails.materials.forEach((material, index) => {
+      const listItem = document.createElement("li");
+      listItem.classList.add("material-item");
+      const link = document.createElement("a");
+      link.classList.add("material-link");
+      link.href = material_links[index];
+      link.textContent = material;
+      listItem.appendChild(link);
+      materialList.appendChild(listItem);
+    });
+  }
+  // Generate module cards and course materials
+  generateModuleCards(course);
+  generateCourseMaterials(course);
+</script>
+
+</body>
+</html>
