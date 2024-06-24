@@ -5,152 +5,85 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Dashboard</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <link rel="stylesheet" href="assets/css/dashboard.css">
   <style>
     .modal {
-      display: none;
-      position: fixed;
-      z-index: 1;
-      left: 0;
-      top: 0;
-      width: 100%;
-      height: 100%;
-      overflow: auto;
-      background-color: rgba(0,0,0,0.4);
+        display: none;
+        position: fixed;
+        z-index: 1;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgba(0,0,0,0.4);
     }
 
     .modal-content {
-      background-color: white;
-      margin: 20% auto;
-      padding: 20px;
-      border-radius: 10px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-      max-width: 300px;
-      text-align: center;
+        background-color: white;
+        margin: 20% auto;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        max-width: 300px;
+        text-align: center;
     }
 
     .close {
-      color: #aaa;
-      float: right;
-      font-size: 28px;
-      font-weight: bold;
+        color: #aaa;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
     }
 
     .close:hover,
     .close:focus {
-      color: black;
-      text-decoration: none;
-      cursor: pointer;
+        color: black;
+        text-decoration: none;
+        cursor: pointer;
     }
 
     .share-button {
-      display: block;
-      width: 100%;
-      margin-top: 10px;
-      padding: 10px;
-      background-color: #37517e;
-      color: white;
-      border: none;
-      border-radius: 5px;
-      text-align: center;
-      text-decoration: none;
+        display: block;
+        width: 100%;
+        margin-top: 10px;
+        padding: 10px;
+        background-color: #37517e;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        text-align: center;
+        text-decoration: none;
     }
 
     .share-button:hover {
-      background-color: #1e3a5c;
+        background-color: #1e3a5c;
     }
 
     .share-icon {
-      width: 20px;
-      height: 20px;
-      margin-right: 5px;
-      vertical-align: middle;
+        width: 20px;
+        height: 20px;
+        margin-right: 5px;
+        vertical-align: middle;
     }
 
-    .dashboard {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 20px;
-    }
-    .card {
-      background-color: #fff;
-      border: 1px solid #ccc;
-      border-radius: 8px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-      padding: 20px;
-      text-align: center;
-    }
-    .card h2 {
-      font-size: 24px;
-      margin-bottom: 10px;
-      color: #37517e;
-    }
-    .card p {
-      font-size: 18px;
-      margin: 10px 0;
-    }
-    .current-balance {
-      background-color: #37517e;
-      color: #fff;
-    }
-    .current-balance h2, .current-balance p {
-      color: #fff;
-    }
-    .icon {
-      font-size: 50px;
-      margin-bottom: 10px;
-    }
+</style>
 
-    .video-container {
-      position: relative;
-      width: 100%;
-      padding-bottom: 56.25%;
-      height: 0;
-      overflow: hidden;
-    }
-
-    .video-iframe {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-    }
-
-    .video-overlay {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.5);
-      display: none;
-    }
-
-    .video-container:hover .video-overlay {
-      display: block;
-    }
-
-  </style>
 </head>
 <body>
+   
   <!-- Navbar -->
+    
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="color:  #37517e;">
     <div class="container-fluid">
-      <div class="navbar-brand light">Dashboard</div>
+      <div class="navbar-brand light">E-learning</div>
+      <!-- <div class="navbar-brand light"  id="amount"></div> -->
+
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <li class="nav-item">
-            <a class="nav-link" id="courses" aria-current="page" href="#">My Courses</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="course_marketplace.html" tabindex="-1">Course Marketplace</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" id="withdraw" style="display: none;" href="#" tabindex="-1">Withdraw</a>
-          </li>
         </ul>
         <form class="d-flex">
           <button type="button" onclick="window.location.href = 'index.html';" class="btn btn-light">Home</button>
@@ -162,161 +95,311 @@
   <!-- End navbar -->
   <!-- Body -->
   <div class="container mt-4">
-    <h3 class="mb-4">Dashboard Metrics</h3>
+    <h3 class="mb-4">My Courses</h3>
 
-    <div class="dashboard">
-      <div class="card current-balance">
-        <div class="icon">💰</div>
-        <h2>Current Balance</h2>
-        <p id="amount"></p>
-      </div>
-      <div class="card">
-        <div class="icon">📈</div>
-        <h2>Overall Earnings</h2>
-        <p>$45,678.90</p>
-      </div>
-      <div class="card">
-        <div class="icon">🛒</div>
-        <h2>Sales Made</h2>
-        <p>1,234</p>
-      </div>
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4" id="courseList">
     </div>
-
-    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4" id="courseList"></div>
   </div>
   <!-- End Body -->
-
-  <!-- Modal -->
-  <div id="shareModal" class="modal">
-    <div class="modal-content">
+ 
+<!-- Modal -->
+<div id="shareModal" class="modal">
+  <div class="modal-content">
       <span class="close" onclick="closeShareModal()">&times;</span>
       <p>Select platform to share:</p>
       <!-- WhatsApp share button -->
-      <a id="whatsappLink" class="share-button" target="_blank" href="#">
-        <img class="share-icon" src="assets/img/whatsapp.png" alt="WhatsApp icon">
-        Share on WhatsApp
+      <a id="whatsappLink" class="share-button" target="_blank" href="#"> <!-- Empty href for now -->
+          <img class="share-icon" src="assets/img/whatsapp.png" alt="WhatsApp icon">
+          Share on WhatsApp
       </a>
       <!-- Facebook share button -->
-      <a id="facebookLink" class="share-button" target="_blank" href="#">
-        <img class="share-icon" src="assets/img/facebook.png" alt="Facebook icon">
-        Share on Facebook
+      <a id="facebookLink" class="share-button" target="_blank" href="#"> <!-- Empty href for now -->
+          <img class="share-icon" src="assets/img/facebook.png" alt="Facebook icon">
+          Share on Facebook
       </a>
-    </div>
+      <!-- Add more buttons for other platforms -->
   </div>
+</div>
 
-  <div class="footer">
-    <p>&copy; 2024 Greater Grace Institute. All rights reserved.</p>
-  </div>
-
+  
+<div class="footer">
+  <p>&copy; 2024 Greater Grace Institute. All rights reserved.</p>
+</div>
   <script>
-    document.addEventListener("DOMContentLoaded", function() {
+
+        document.addEventListener("DOMContentLoaded", function() {
+      // Wait for content to load, add event listeners
       const courseList = document.getElementById('courseList');
       courseList.addEventListener('click', function(e) {
         if (e.target && e.target.name === 'share-btn') {
+          
           openShareModal(e.target.dataset.title.toLowerCase());
         }
       });
     });
 
     function openShareModal(videoTitle) {
-      const credential = JSON.parse(localStorage.getItem('credential'));
-      const user = credential.user.uid;
-      const videoURL = `https://greater-grace-institute.onrender.com/vid.html?title=${encodeURIComponent(videoTitle)}&user=${encodeURIComponent(user)}`;
-      document.getElementById('whatsappLink').href = `https://wa.me/?text=Check%20out%20this%20amazing%20course!%20${encodeURIComponent(videoURL)}`;
-      document.getElementById('facebookLink').href = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(videoURL)}&quote=${encodeURIComponent(videoTitle)}`;
-      document.getElementById('shareModal').style.display = 'block';
+    const credential = JSON.parse(localStorage.getItem('credential'));
+        user = credential.user.uid;
+        // Generate the video URL with query parameter
+        const videoURL = `https://greater-grace-institute.onrender.com/vid.html?title=${encodeURIComponent(videoTitle)}&user=${encodeURIComponent(user)}`;
+        // Set the href attribute of WhatsApp and Facebook links
+        document.getElementById('whatsappLink').href = `https://wa.me/?text=Check%20out%20this%20amazing%20course!%20${encodeURIComponent(videoURL)}`;
+        document.getElementById('facebookLink').href = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(videoURL)}&quote=${encodeURIComponent(videoTitle)}`;
+
+        // Display the modal
+        document.getElementById('shareModal').style.display = 'block';
     }
 
+    // Function to close the share modal
     function closeShareModal() {
       document.getElementById('shareModal').style.display = 'none';
     }
 
-    function goToCourse(title, imageSrc) {
-      const courseDetails = {
-        title: title,
-        image: imageSrc
-      };
-      const courseDetailsJSON = JSON.stringify(courseDetails);
-      localStorage.setItem('courseDetails', courseDetailsJSON);
-      window.location.href = 'course.html';
-    }
 
-    window.onload = function() {
-      const isLoggedIn = localStorage.getItem('isLoggedIn');
-      const credential = localStorage.getItem('credential');
-      if (!isLoggedIn && !credential) {
-        window.location.href = 'login.html';
-      }
-    };
-
-    // Sample course data
-    const platformCourses = [
-      {
-        title: 'Introduction to Programming',
-        image: 'https://via.placeholder.com/150',
-        description: 'Learn the basics of programming in this comprehensive course.',
-        videoUrl: 'https://www.youtube.com/embed/tgbNymZ7vqY'
-      },
-      {
-        title: 'Advanced Python',
-        image: 'https://via.placeholder.com/150',
-        description: 'Master advanced Python concepts and techniques.',
-        videoUrl: 'https://www.youtube.com/embed/tgbNymZ7vqY'
-      },
-      {
-        title: 'Data Structures',
-        image: 'https://via.placeholder.com/150',
-        description: 'Understand data structures and their applications.',
-        videoUrl: 'https://www.youtube.com/embed/tgbNymZ7vqY'
-      }
-    ];
-
-    // Populate the course list
-    const courseList = document.getElementById('courseList');
-
-    platformCourses.forEach((course, index) => {
-      const colDiv = document.createElement('div');
-      colDiv.classList.add('col');
-      const cardDiv = document.createElement('div');
-      cardDiv.classList.add('card');
-      const videoContainerDiv = document.createElement('div');
-      videoContainerDiv.classList.add('video-container');
-      const videoIframe = document.createElement('iframe');
-      videoIframe.classList.add('video-iframe');
-      videoIframe.src = course.videoUrl;
-      videoIframe.title = course.title;
-      videoIframe.allowFullscreen = true;
-      videoContainerDiv.appendChild(videoIframe);
-      const cardBodyDiv = document.createElement('div');
-      cardBodyDiv.classList.add('card-body');
-      const cardTitle = document.createElement('h5');
-      cardTitle.classList.add('card-title');
-      cardTitle.innerText = course.title;
-      const cardDescription = document.createElement('p');
-      cardDescription.classList.add('card-text');
-      cardDescription.innerText = course.description;
-      const shareButton = document.createElement('button');
-      shareButton.classList.add('btn', 'btn-primary');
-      shareButton.name = 'share-btn';
-      shareButton.dataset.title = course.title;
-      shareButton.innerText = 'Share';
-      cardBodyDiv.appendChild(cardTitle);
-      cardBodyDiv.appendChild(cardDescription);
-      cardBodyDiv.appendChild(shareButton);
-      cardDiv.appendChild(videoContainerDiv);
-      cardDiv.appendChild(cardBodyDiv);
-      colDiv.appendChild(cardDiv);
-      courseList.appendChild(colDiv);
-    });
-
-    // Update user balance
-    const userBalance = 100.00;
-    const amountElement = document.getElementById('amount');
-    amountElement.textContent = userBalance.toLocaleString('en-US', { style: 'currency', currency: 'USD' });
 
   </script>
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-app.js";
+    import { getDatabase, get, ref } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-database.js";
 
-  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXvPILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+    const firebaseConfig = {
+      apiKey: "AIzaSyBs6eNM7ig2Yaly16j1a3FIo70RyyrSYvU",
+      authDomain: "learnify-419911.firebaseapp.com",
+      projectId: "learnify-419911",
+      storageBucket: "learnify-419911.appspot.com",
+      messagingSenderId: "600218874857",
+      appId: "1:600218874857:web:2d65e1d3e68b840938d178",
+      measurementId: "G-M8PS7BKZL0"
+    };
+    const app = initializeApp(firebaseConfig);
+    const db = getDatabase();
+    const dbref = ref(db);
+    const credential = JSON.parse(localStorage.getItem('credential'));
+    const courseList = document.getElementById('courseList');
+    const amount = document.getElementById('amount');
+
+    
+// Sample course data
+const platformCourses = [
+    { title: "Virtual Pencil Art", image: "https://drive.google.com/file/d/1fjqfNFSWZhKDdsifMtd3lbkspoCOHAXf/preview"
+ ,id:'pencilart'},
+    { title: "Affiliate Marketing Mastery(AMM)", image: "https://drive.google.com/file/d/1SS9Jabqst-cSKm0kX66d09qeBxR7WapL/preview", 
+    id: 'affiliate'},
+];
+
+   
+function goToCourse(title, imageSrc) {
+    // Create an object with course details
+    const courseDetails = {
+      title: title,
+      image: imageSrc
+      // Add more details as needed
+    };
+
+    // Convert the object to a JSON string
+    const courseDetailsJSON = JSON.stringify(courseDetails);
+
+    // Store the course details in local storage
+    localStorage.setItem('courseDetails', courseDetailsJSON);
+
+    // Redirect to the course page or perform other actions
+    window.location.href = 'course.html'; // Replace 'course.html' with the actual URL of your course page
+  }
+
+    get(ref(db, 'users/' + credential.user.uid)).then((snapshot) => {
+      if (snapshot.exists()) {
+         
+        if(snapshot.val().affiliate){
+          amount.innerText = `Balance: $${snapshot.val().amount}.00`;
+          document.getElementById('withdraw').style.display = 'block';
+        }
+        
+        const myCourses = snapshot.val().courses
+        
+        if (myCourses) {
+          for (const courseId in myCourses) {
+            platformCourses.forEach(course =>{
+              if(courseId === course.id){
+                console.log('jel');
+                const courseCard = `
+                <div class="col">
+    <div class="card h-100">
+        <div class="card-body">
+            <h5 class="card-title">${course.title}</h5>
+            <div class="video-container">
+                <iframe class="video-iframe" src="${course.image}" allowfullscreen></iframe>
+                <div class="video-overlay"></div> <!-- Overlay for the video -->
+            </div>
+        </div>
+        <div class="card-footer d-flex justify-content-between align-items-center">
+            <div>
+                <button class="btn btn-primary" onclick="goToCourse('${course.title}')">Go to Course</button>
+            </div>
+            <div>
+                <button class="btn btn-secondary" name='share-btn' data-title="${course.title}" style="background-color: #37517e">Share</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+            
+`;
+     courseList.innerHTML += courseCard;
+              }
+            });
+            
+           
+          }
+        } else {
+          courseList.innerHTML = '<p>No courses available</p>';
+        }
+      }
+    }).catch((err) => {
+      courseList.innerHTML = '<p>Error connecting to the internet</p>'
+    });
+
+    function promoteCourse(){
+         
+      get(ref(db, 'users/' + credential.user.uid)).the((snapshot)=>{
+             
+        if(snapshot.exists){
+          if(snapshot.val().affiliate){
+            //Generate link to clip board
+          }
+        }
+      }).catch((err)=>{
+
+      })
+    }
+ 
+  </script>
+  <script>
+    window.onload = function(){
+      const isLoggedIn = localStorage.getItem('isLoggedIn');
+      const credential = localStorage.getItem('credential');
+      if(!isLoggedIn && !credential){
+        window.location.href = 'login.html';
+      }
+      
+    };
+  </script>
+
+  <script>
+       
+// Sample course data
+const Courses = [
+    { title: "Virtual Pencil Art", modules: [
+    {
+        title: "Module 1",
+        video: {
+          title: "Video 1: Introduction to the Course",
+          link: "https://drive.google.com/file/d/1fjqfNFSWZhKDdsifMtd3lbkspoCOHAXf/preview",
+          description: "Learn How To Make Beautiful Pencil Art Virtually(1)"
+        }
+    
+      },
+      {
+        title: "Module 2",
+        video: {
+          title: "Video 1: Setting Up",
+          link: "https://drive.google.com/file/d/1Tdj4BuuWHUFsEU0yQRChvJww3nFk8k7X/preview",
+          description: "Learn How To Make Beautiful Pencil Art Virtually(2)"
+        }
+       
+      },
+
+      {
+        title: "Module 3",
+        video: {
+          title: "vide 2",
+          link: "https://drive.google.com/file/d/1UjqOrCvNae3WZa6wGT-xLBXRU2yRuND4/preview",
+          description: "Learn How To Make Beautiful Pencil Art Virtually(3)"
+        }
+      },
+
+      {
+        title: "Module 4",
+        video: {
+          title: 'vid 2',
+          link: 'https://drive.google.com/file/d/1JcUdnnZd2-Nk8MUwN64XTUZmQaMnYso-/preview',
+          description: "Use our suggested software to improve the quality and appearance of your virtual arts real quick."
+        }
+      },
+
+      {
+        title: "Module 5",
+        video: {
+          title: "vid 2",
+          link: "https://drive.google.com/file/d/1gzjKosP-m11yxCbHW71YOHlftuqoBRJJ/preview",
+          description: "Make precise adjusment to your art to improve visual quality."
+        
+      },
+    }
+    ],
+    materials: [
+      "Snapseed App",
+      "Photoroom AI Photo Editor",
+      "Photo Enhancer App",
+      "Fine App"
+  ],
+
+  links: {
+  0:"https://drive.google.com/file/d/1xY5qiOgLvgJtRHyyFziCY44iELo5LWKE/view?usp=drive_link",
+  1:"https://drive.google.com/file/d/1xf-uOtI7sSV6BQz38mrhz4gmsvLmNtzT/view?usp=drive_link",
+  2:"https://drive.google.com/file/d/1FQjnZUKxQJSCTDdnCVwM8TlOzFwR6QRN/view?usp=drive_link",
+  3:"https://drive.google.com/file/d/1Ias4Yk-nwX92QvP5-eT5yc-y-oiYu9cB/view?usp=sharing"
+  }
+},
+    { title: "Affiliate Marketing", modules: [
+      {
+        title: "Module 1",
+        video: {
+          title: "Video 1: Introduction to the Course",
+          link: "https://drive.google.com/file/d/1SS9Jabqst-cSKm0kX66d09qeBxR7WapL/preview",
+          description: "Learn affiliate marketing(1)"
+        }
+      },
+
+      {
+        title: "Module 2",
+        video: {
+          title: "vid 2",
+      link: "https://drive.google.com/file/d/1SewNYj4f9gljkKHEvQndd7Uybz3eq8E-/preview",
+          
+          description: "Learn affiliate marketing(2)"
+        }
+      },
+
+      {
+        title: "Module 3",
+        video: {
+          title: "vid 3",
+      link: "https://drive.google.com/file/d/1TDIpzg3hlYXNh_ps5g5sYc_xo8DT4qFf/preview",
+
+          description: "Learn affiliate marketing(3)"
+        }
+      }
+    ]},
+];
+             
+function goToCourse(title) {
+    Courses.forEach(course=>{
+      console.log(course.title, title)
+        if(course.title === title){
+
+    const courseDetailsJSON = JSON.stringify(course);
+    localStorage.setItem('courseDetails', courseDetailsJSON);
+    window.location.href = 'course.html';
+        }
+
+    });
+
+    // Redirect to the course page or perform other actions
+    // window.location.href = 'course.html'; // Replace 'course.html' with the actual URL of your course page
+  }
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
 </body>
 </html>

@@ -28,7 +28,7 @@ const courses = [
     title: "Affiliate Marketing Mastery(AMM)",
     description: "Learn a better strategy for your affiliate marketing journey",
     price: "70.00",
-    image: "https://drive.google.com/file/d/1ADekc-28vhUkXC-ueCymMDWBnl9kWpwr/preview"
+    image: "https://drive.google.com/file/d/1Qdu2SuRbrUYWo7lSJJr-EDjdzH-DFHLy/preview"
  }
 ];
 let currentPage = 1;
