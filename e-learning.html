@@ -234,7 +234,190 @@
       console.error("Error fetching user data: ", error);
     });
 
+
+    function promoteCourse(){
+         
+         get(ref(db, 'users/' + credential.user.uid)).the((snapshot)=>{
+                
+           if(snapshot.exists){
+             if(snapshot.val().affiliate){
+               //Generate link to clip board
+             }
+           }
+         }).catch((err)=>{
+   
+         })
+        }
+
+       window.onload = function(){
+         const isLoggedIn = localStorage.getItem('isLoggedIn');
+         const credential = localStorage.getItem('credential');
+         if(!isLoggedIn && !credential){
+           window.location.href = 'login.html';
+         }
+         
+       };
+
   </script>
+    <script>
+       
+      // Sample course data
+      const Courses = [
+          { title: "Virtual Pencil Art", modules: [
+          {
+              title: "Module 1",
+              video: {
+                title: "Video 1: Introduction to the Course",
+                link: "https://drive.google.com/file/d/1fjqfNFSWZhKDdsifMtd3lbkspoCOHAXf/preview",
+                description: "Learn How To Make Beautiful Pencil Art Virtually(1)"
+              }
+          
+            },
+            {
+              title: "Module 2",
+              video: {
+                title: "Video 1: Setting Up",
+                link: "https://drive.google.com/file/d/1Tdj4BuuWHUFsEU0yQRChvJww3nFk8k7X/preview",
+                description: "Learn How To Make Beautiful Pencil Art Virtually(2)"
+              }
+             
+            },
+      
+            {
+              title: "Module 3",
+              video: {
+                title: "vide 2",
+                link: "https://drive.google.com/file/d/1UjqOrCvNae3WZa6wGT-xLBXRU2yRuND4/preview",
+                description: "Learn How To Make Beautiful Pencil Art Virtually(3)"
+              }
+            },
+      
+            {
+              title: "Module 4",
+              video: {
+                title: 'vid 2',
+                link: 'https://drive.google.com/file/d/1JcUdnnZd2-Nk8MUwN64XTUZmQaMnYso-/preview',
+                description: "Use our suggested software to improve the quality and appearance of your virtual arts real quick."
+              }
+            },
+      
+            {
+              title: "Module 5",
+              video: {
+                title: "vid 2",
+                link: "https://drive.google.com/file/d/1gzjKosP-m11yxCbHW71YOHlftuqoBRJJ/preview",
+                description: "Make precise adjusment to your art to improve visual quality."
+              
+            },
+          }
+          ],
+          materials: [
+            "Snapseed App",
+            "Photoroom AI Photo Editor",
+            "Photo Enhancer App",
+            "Fine App"
+        ],
+      
+        links: {
+        0:"https://drive.google.com/file/d/1xY5qiOgLvgJtRHyyFziCY44iELo5LWKE/view?usp=drive_link",
+        1:"https://drive.google.com/file/d/1xf-uOtI7sSV6BQz38mrhz4gmsvLmNtzT/view?usp=drive_link",
+        2:"https://drive.google.com/file/d/1FQjnZUKxQJSCTDdnCVwM8TlOzFwR6QRN/view?usp=drive_link",
+        3:"https://drive.google.com/file/d/1Ias4Yk-nwX92QvP5-eT5yc-y-oiYu9cB/view?usp=sharing"
+        }
+      },
+          { title: "Affiliate Marketing Mastery(AMM)", modules: [
+            {
+              title: "Section 1-Module 1",
+              video: {
+                title: "Video 1: Introduction to the Course",
+                link: "https://drive.google.com/file/d/1Qdu2SuRbrUYWo7lSJJr-EDjdzH-DFHLy/preview",
+                description: "affiliate marketing mastery"
+              }
+            },
+      
+            {
+              title: "Section 1-Module 2",
+              video: {
+                title: "vid 2",
+            link: "https://drive.google.com/file/d/1RJeQqZtZxnxsQkJC6_c-t2KySdbdp351/preview",
+                
+                description: "Learn affiliate marketing(2)"
+              }
+            },
+      
+            {
+              title: "Section 1-Module 3",
+              video: {
+                title: "vid 3",
+            link: "https://drive.google.com/file/d/1RTU_z30WjloFipERoEWRwnMnLbdtEEz6/preview",
+      
+                description: "Learn affiliate marketing(3)"
+              }
+            },
+            {
+              title: "Section 2-Module 1",
+              video: {
+                title: "vid 3",
+            link: "https://drive.google.com/file/d/1S-C11jDEN3lW4lZpedcRMKWQwqUSlJBo/preview",
+      
+                description: "Learn affiliate marketing(3)"
+              }
+            },
+
+            {
+              title: "Section 2-Module 2",
+              video: {
+                title: "vid 3",
+            link: "https://drive.google.com/file/d/1Sk9wN44BwtJ86yt6OifEKejLrxoLiCro/preview",
+      
+                description: "Learn affiliate marketing(3)"
+              }
+            },
+            {
+              title: "Section 2-Module 3",
+              video: {
+                title: "vid 3",
+            link: "https://drive.google.com/file/d/1SbwXuHA3yf9mFAafv6vVlOexQ8SffjFo/preview",
+      
+                description: "Learn affiliate marketing(3)"
+              }
+            },
+            {
+              title: "Section 2-Module 4",
+              video: {
+                title: "vid 3",
+            link: "https://drive.google.com/file/d/1TSX62TLmqqvkbEIdKAQha20SintrXy23/preview",
+      
+                description: "Learn affiliate marketing(3)"
+              }
+            },{
+              title: "Section 2-Module 5",
+              video: {
+                title: "vid 3",
+            link: "https://drive.google.com/file/d/1TfN9ckFvrxaEe7UszmEza_Veas1c92P_/preview",
+      
+                description: "Learn affiliate marketing(3)"
+              }
+            },
+          ]},
+      ];
+                   
+      function goToCourse(title) {
+          Courses.forEach(course=>{
+            console.log(course.title, title)
+              if(course.title === title){
+      
+          const courseDetailsJSON = JSON.stringify(course);
+          localStorage.setItem('courseDetails', courseDetailsJSON);
+          window.location.href = 'course.html';
+              }
+      
+          });
+      
+          // Redirect to the course page or perform other actions
+          // window.location.href = 'course.html'; // Replace 'course.html' with the actual URL of your course page
+        }
+        </script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMF5gJ1f9NcSFjBBnMRZlyKbPb2tm5W8d6M5m9I5LY2z8Mld5pDHEnxzz9" crossorigin="anonymous"></script>
 </body>
 </html>
