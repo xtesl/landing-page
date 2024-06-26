@@ -239,8 +239,8 @@
       const videoIframe = document.createElement("iframe");
       videoIframe.classList.add("video-iframe");
       videoIframe.setAttribute('sandbox',"allow-same-origin allow-scripts")
+      videoIframe.setAttribute('allowfullscreen', true);
       videoIframe.src = module.video.link;
-      videoIframe.allowfullscreen = true;
 
       const videoDescription = document.createElement("p");
       videoDescription.classList.add("video-description");
