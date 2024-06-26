@@ -195,8 +195,10 @@
 
     // Sample course data
     const platformCourses = [
-      { title: "Virtual Pencil Art", image: "https://drive.google.com/file/d/1fjqfNFSWZhKDdsifMtd3lbkspoCOHAXf/preview", id: 'pencilart' },
-      { title: "Affiliate Marketing Mastery(AMM)", image: "https://drive.google.com/file/d/1Qdu2SuRbrUYWo7lSJJr-EDjdzH-DFHLy/preview", id: 'affiliate' },
+      { title: "Virtual Pencil Art", image: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjj0NaKDGfjnbxdwkROpNZsBylyXl_YT5a6VY5DiUOGk_D94ELU-JecE4dP93lID_fghg_fjZjlyKVrLwrvmaeArS9_4WryhRx2LoBJjfs98wD5Dn-Ve30JIC5Clfy3CWPAsnl6xrblEg/s1600/Lesson_Drawing2_2.jpg", id: 'pencilart' },
+      { title: "Affiliate Marketing Mastery(AMM)", 
+      image: "https://st.depositphotos.com/1826664/4958/i/450/depositphotos_49581325-stock-photo-affiliate-marketing-three-circles.jpg", 
+      id: 'affiliate' },
     ];
 
     console.log(credential.user.uid);
@@ -211,24 +213,13 @@
               if (courseId === course.id) {
                 const courseCard = `
                     <div class="col">
-    <div class="card h-100">
-        <div class="card-body">
-            <h5 class="card-title">${course.title}</h5>
-            <div class="video-container">
-                <iframe class="video-iframe" src="${course.image}" 
-                sandbox="allow-same-origin" allowfullscreen></iframe>
-                <div class="video-overlay"></div> <!-- Overlay for the video -->
+    <div class="course-card">
+    <img src="${course.image}" class="course-image"></img>
+            <div class="course-info">
+                <h3>${course.title}</h3>
+                <button onclick="goToCourse('${course.title}')" class="btn">Learn</button>
             </div>
         </div>
-        <div class="card-footer d-flex justify-content-between align-items-center">
-            <div>
-                <button class="btn btn-primary" onclick="goToCourse('${course.title}')">Go to Course</button>
-            </div>
-            <div>
-                <button class="btn btn-secondary" name='share-btn' data-title="${course.title}" style="background-color: #37517e">Share</button>
-            </div>
-        </div>
-    </div>
 </div>
  `;
  courseList.innerHTML += courseCard;

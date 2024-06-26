@@ -15,19 +15,40 @@ h3 {
   color: #37517e;
 }
 
-.card {
+.course-card {
   position: relative;
-  border: none;
-  transition: transform 0.3s ease;
-  margin-bottom: 20px; /* Add margin between cards */
+  background: white;
+  border: 1px solid #37517e;
+  margin: 10px;
+  width: 300px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s;
+  overflow: hidden; /* Prevents overflow issues */
 }
 
-.card:hover {
+.course-card:hover {
   transform: translateY(-5px);
 }
 
-.card-title {
-  color: #37517e;
+.course-image {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-bottom: 1px solid #37517e; /* Optional: Adds a border between the image and the info */
+}
+
+.course-info {
+  padding: 15px;
+  box-sizing: border-box;
+}
+
+.btn {
+  background: #37517e;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  transition: background 0.3s;
 }
 
 .card-footer {
