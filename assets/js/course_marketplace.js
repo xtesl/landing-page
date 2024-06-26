@@ -22,13 +22,13 @@ document.addEventListener('DOMContentLoaded', () => {
 // Sample course data
 const courses = [
     { title: "Virtual Pencil Art", description: "Learn to make beautiful and aesthetic pencil art using just your smartphone.", 
-    image: "https://drive.google.com/file/d/1fjqfNFSWZhKDdsifMtd3lbkspoCOHAXf/preview"
+    image: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjj0NaKDGfjnbxdwkROpNZsBylyXl_YT5a6VY5DiUOGk_D94ELU-JecE4dP93lID_fghg_fjZjlyKVrLwrvmaeArS9_4WryhRx2LoBJjfs98wD5Dn-Ve30JIC5Clfy3CWPAsnl6xrblEg/s1600/Lesson_Drawing2_2.jpg"
  ,price: '60.00'},
  {
     title: "Affiliate Marketing Mastery(AMM)",
     description: "Learn a better strategy for your affiliate marketing journey",
     price: "70.00",
-    image: "https://drive.google.com/file/d/1Qdu2SuRbrUYWo7lSJJr-EDjdzH-DFHLy/preview"
+    image: "https://st.depositphotos.com/1826664/4958/i/450/depositphotos_49581325-stock-photo-affiliate-marketing-three-circles.jpg"
  }
 ];
 let currentPage = 1;
@@ -45,14 +45,15 @@ function renderCourses(page) {
         const courseCard = document.createElement('div');
         courseCard.className = 'course-card';
         courseCard.innerHTML = `
-        <div class="video-overlay"></div>
-            <iframe src="${course.image}"></iframe>
+        
+       <img src="${course.image}" class="course-image"></img>
             <div class="course-info">
                 <h3>${course.title}</h3>
                 <h1 style="display:none">${course.price}</h1>
                 <p>${course.description}</p>
                 <button class="btn">Enroll Now</button>
             </div>
+        
         `;
         container.appendChild(courseCard);
     });
@@ -106,8 +107,7 @@ function renderCoursesSpecific(coursesToRender) {
         const courseCard = document.createElement('div');
         courseCard.className = 'course-card';
         courseCard.innerHTML = `
-        <div class="video-overlay"></div>
-            <iframe src="${course.image}"></iframe>
+            <img src="${course.image}" class="course-image"></img>
             <div class="course-info">
                 <h3>${course.title}</h3>
                 <h1 style="display=none">${course.price}</h1>
@@ -137,7 +137,7 @@ function addEnrollListeners() {
             const course = {
                 title: courseCard.querySelector('h3').textContent,
                 description: courseCard.querySelector('p').textContent,
-                image: courseCard.querySelector('iframe').src,
+                image: courseCard.querySelector('img').src,
                 price: courseCard.querySelector('h1').textContent
             };
             localStorage.setItem('course', JSON.stringify(course));

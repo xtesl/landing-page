@@ -14,9 +14,7 @@ body {
 }
 
 .navbar {
-  background: linear-gradient(135deg, #37517e, #3a7bd5); /* Gradient background */
-
-    background: #37517e;
+    background: linear-gradient(135deg, #37517e, #3a7bd5); /* Gradient background */
     color: white;
     display: flex;
     justify-content: space-between;
@@ -66,6 +64,7 @@ body {
     flex-wrap: wrap;
     justify-content: center;
     padding: 20px;
+    overflow: hidden; /* Clear floating elements */
 }
 
 .course-card {
@@ -76,6 +75,7 @@ body {
     width: 300px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     transition: transform 0.2s;
+    overflow: hidden; /* Prevents overflow issues */
 }
 
 .course-card:hover {
@@ -86,10 +86,12 @@ body {
     width: 100%;
     height: 200px;
     object-fit: cover;
+    border-bottom: 1px solid #37517e; /* Optional: Adds a border between the image and the info */
 }
 
 .course-info {
     padding: 15px;
+    box-sizing: border-box;
 }
 
 .btn {
@@ -105,9 +107,10 @@ body {
     background: #2c4362;
 }
 
-
 .search-container {
     display: flex;
+    justify-content: center; /* Centers the search container */
+    margin: 20px 0; /* Adds margin for spacing */
 }
 
 .search-input {
@@ -132,7 +135,6 @@ body {
     background: #1b2a40;
 }
 
-
 /* Footer styles */
 .footer {
     background-color: #37517e;
@@ -150,10 +152,7 @@ body {
     font-size: 14px;
 }
 
-
-/*
-Pagination
-*/
+/* Pagination */
 .pagination {
     display: flex;
     justify-content: center;
@@ -186,9 +185,15 @@ Pagination
     bottom: 0;
     top: 0;
     left: 0;
-  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black */
-  opacity: 0; /* Initially hidden */
-  transition: opacity 0.3s ease;
-
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black */
+    opacity: 0; /* Initially hidden */
+    transition: opacity 0.3s ease;
     z-index: 2; /* Ensures it's above the video */
+}
+
+/* Clearfix for parent containers to clear floating children */
+.clearfix::after {
+    content: "";
+    clear: both;
+    display: table;
 }
