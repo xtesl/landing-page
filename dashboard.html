@@ -120,15 +120,13 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <li class="nav-item">
-            <a class="nav-link" id="courses" aria-current="page" href="#">My Courses</a>
-          </li>
+         
          
           <li class="nav-item">
             <a class="nav-link" href="course_marketplace.html" tabindex="-1">Course Marketplace</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" id="withdraw" style="display: none;"  href="#" tabindex="-1">Withdraw</a>
+            <a class="nav-link" id="withdraw" style="display: none;"  href="withdraw.html" tabindex="-1">Request Withdraw</a>
           </li>
           
           
@@ -154,12 +152,12 @@
       <div class="card">
           <div class="icon">📈</div>
           <h2>Overall Earnings</h2>
-          <p>$45,678.90</p>
+          <p id="net"></p>
       </div>
       <div class="card">
           <div class="icon">🛒</div>
           <h2>Sales Made</h2>
-          <p>1,234</p>
+          <p id="sales"></p>
       </div>
   </div>
 
@@ -245,8 +243,9 @@
     const credential = JSON.parse(localStorage.getItem('credential'));
     const courseList = document.getElementById('courseList');
     const amount = document.getElementById('amount');
+    const net = document.getElementById('net');
+    const sales = document.getElementById('sales');
 
-    
 // Sample course data
 const platformCourses = [
     { title: "Virtual Pencil Art", image: "https://drive.google.com/file/d/1fjqfNFSWZhKDdsifMtd3lbkspoCOHAXf/preview"
@@ -279,6 +278,8 @@ function goToCourse(title, imageSrc) {
          
         if(snapshot.val().affiliate){
           amount.innerText = `Balance: $${snapshot.val().amount}.00`;
+          net.innerText = `Net: $${snapshot.val().net}.00`;
+          sales.innerText = snapshot.val().sales;
           document.getElementById('withdraw').style.display = 'block';
         }
         
@@ -288,7 +289,6 @@ function goToCourse(title, imageSrc) {
           for (const courseId in myCourses) {
             platformCourses.forEach(course =>{
               if(courseId === course.id){
-                console.log('jel');
                 const courseCard = `
                 <div class="col">
     <div class="card h-100">
