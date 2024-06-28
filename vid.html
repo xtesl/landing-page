@@ -105,7 +105,7 @@
 
     // Predefined courses with their video IDs
     const courses = {
-        "affiliate marketing": {
+        "affiliate marketing mastery(amm)": {
             desc: "Learn Affiliate Marketing The Right Way And Earn!",
     link: "https://drive.google.com/file/d/1SS9Jabqst-cSKm0kX66d09qeBxR7WapL/preview"
         },
@@ -125,7 +125,7 @@
     }
 
     // Function to update the video source based on the query parameter
-    function updateVideo() {
+    function displayVideo() {
       const title = getQueryParam('title');
       const user = getQueryParam('user');
 
@@ -147,9 +147,9 @@
     }
 
     // Call the function to update the video source on page load
-    window.onload = function() {
-      updateVideo();
-    };
+     document.addEventListener('DOMContentLoaded', function(){
+        displayVideo();
+     })
   </script>
 </body>
 </html>

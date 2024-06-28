@@ -94,6 +94,15 @@ body {
     box-sizing: border-box;
 }
 
+
+.card-footer {
+    background-color: #f9f9f9;
+    border-top: none;
+    display: flex; /* Use flexbox for layout */
+    justify-content: space-between; /* Distribute items evenly */
+    align-items: center; /* Align items vertically */
+  }
+
 .btn {
     background: #37517e;
     color: white;

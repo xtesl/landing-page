@@ -27,7 +27,7 @@ const courses = [
  {
     title: "Affiliate Marketing Mastery(AMM)",
     description: "Learn a better strategy for your affiliate marketing journey",
-    price: "70.00",
+    price: "105.00",
     image: "https://st.depositphotos.com/1826664/4958/i/450/depositphotos_49581325-stock-photo-affiliate-marketing-three-circles.jpg"
  }
 ];
@@ -51,7 +51,15 @@ function renderCourses(page) {
                 <h3>${course.title}</h3>
                 <h1 style="display:none">${course.price}</h1>
                 <p>${course.description}</p>
+
                 <button class="btn">Enroll Now</button>
+                <hr>
+                <div class="card-footer d-flex justify-content-between align-items-center">
+                <h4>GHS ${course.price}</h4>
+                </div>
+                <div class="card-footer d-flex justify-content-between align-items-center">
+                <h5>Commission: 50%</h6>
+                </div>
             </div>
         
         `;

@@ -84,11 +84,83 @@
                 <input type="number" class="form-control" id="amount" placeholder="Enter the amount">
             </div>
             
-            <button type="submit" class="btn btn-primary btn-block">Request Withdraw</button>
+            <button type="button" id="withdraw" class="btn btn-primary btn-block">Request Withdraw</button>
         </form>
     </div>
     <div class="footer">
         <p>&copy; 2024 Greater Grace Institute. All rights reserved.</p>
     </div>
+
+    <script type="module">
+   import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-app.js";
+    import { getDatabase, get, ref } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-database.js";
+
+  const firebaseConfig = {
+      apiKey: "AIzaSyBs6eNM7ig2Yaly16j1a3FIo70RyyrSYvU",
+      authDomain: "learnify-419911.firebaseapp.com",
+      projectId: "learnify-419911",
+      storageBucket: "learnify-419911.appspot.com",
+      messagingSenderId: "600218874857",
+      appId: "1:600218874857:web:2d65e1d3e68b840938d178",
+      measurementId: "G-M8PS7BKZL0"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getDatabase();
+    const dbref = ref(db);
+
+    const credential = JSON.parse(localStorage.getItem('credential'));
+
+                       
+function finishPayment() {
+            // Replace '1234567890' with your actual phone number
+            const phoneNumber = '233556373440';
+            const amount = document.getElementById('amount');
+            let amountLess = true;
+
+            if(!amount.value.trim()){
+                return;
+            }
+            //check for 0 withdrawal and cancel it
+            if(parseInt(amount.value.trim()) == 0){
+                return;
+            }
+
+            get(ref(db, 'users/' + credential.user.uid)).then((snapshot) => {
+
+                if(snapshot.exists()){
+                
+                const balance = snapshot.val().amount;
+
+                //Compare amount to be withdrawn and balance
+
+        if(parseInt(amount.value.trim()) < balance){
+                    
+                          
+            const message = encodeURIComponent(
+                'Hello, I want to withdraw an amount of $' + amount.value.trim()
+        );
+
+            // Generate the WhatsApp link
+            const whatsappLink = `https://wa.me/${phoneNumber}?text=${message}`;
+            // Open WhatsApp with the pre-filled message
+
+            window.open(whatsappLink);
+
+   
+     }
+
+ }
+                
+            }).catch((err) => {
+                console.log(err)
+            });
+
+
+        }
+               
+    const withdraw = document.getElementById('withdraw');
+    withdraw.addEventListener('click', finishPayment)
+    </script>
 </body>
 </html>
