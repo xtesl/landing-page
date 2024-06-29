@@ -196,12 +196,15 @@
     // Sample course data
     const platformCourses = [
       { title: "Virtual Pencil Art", 
-      image: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjj0NaKDGfjnbxdwkROpNZsBylyXl_YT5a6VY5DiUOGk_D94ELU-JecE4dP93lID_fghg_fjZjlyKVrLwrvmaeArS9_4WryhRx2LoBJjfs98wD5Dn-Ve30JIC5Clfy3CWPAsnl6xrblEg/s1600/Lesson_Drawing2_2.jpg", 
+      image: "assets/img/pencilart.jpg", 
       id: 'pencilart' },
       { title: "Affiliate Marketing Mastery(AMM)", 
       image: "https://st.depositphotos.com/1826664/4958/i/450/depositphotos_49581325-stock-photo-affiliate-marketing-three-circles.jpg", 
+    
       id: 'affiliate' },
     ];
+
+
 
     console.log(credential.user.uid);
     get(ref(db, 'users/' + credential.user.uid)).then((snapshot) => {

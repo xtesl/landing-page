@@ -31,19 +31,22 @@
       margin-bottom: 40px;
     }
 
-    /* Video Container */
-    .video-container {
+    /* Image Container */
+    .image-container {
       position: relative;
       width: 100%;
       padding-top: 56.25%; /* 16:9 Aspect Ratio */
+      overflow: hidden;
     }
 
-    .video-iframe {
+    .course-image {
       position: absolute;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
+      object-fit: cover;
+      border-bottom: 1px solid #37517e; /* Optional: Adds a border between the image and the info */
     }
 
     /* Transparent Overlay */
@@ -86,14 +89,12 @@
     <p class="description" id="description"></p>
     <div class="row">
       <div class="col-md-8 offset-md-2">
-        <div class="video-container">
-          <!-- Video iframe -->
-          <iframe id="videoFrame" class="video-iframe" src="" allowfullscreen></iframe>
+        <div class="image-container">
+          <!-- Course image -->
+          <img class="course-image" id="course-image" alt="Course Image">
           <!-- Transparent overlay -->
-          <div class="overlay" id="overlay">
-            <div class="overlay-content">
-              <p id="courseNotFound" style="display: none;">Course not found</p>
-            </div>
+          <div class="overlay-content">
+            <p id="courseNotFound" style="display: none;">Course not found</p>
           </div>
         </div>
       </div>
@@ -102,30 +103,30 @@
   </div>
 
   <script>
-
-    // Predefined courses with their video IDs
     const courses = {
-        "affiliate marketing mastery(amm)": {
-            desc: "Learn Affiliate Marketing The Right Way And Earn!",
-    link: "https://drive.google.com/file/d/1SS9Jabqst-cSKm0kX66d09qeBxR7WapL/preview"
-        },
-        "virtual pencil art": {
-            desc: "Learn To Make Awesome Pencil Arts On Your Smartphone",
-    link: "https://drive.google.com/file/d/1fjqfNFSWZhKDdsifMtd3lbkspoCOHAXf/preview"
-
-            
-        }
+      "affiliate marketing mastery(amm)": {
+        desc: "Learn Affiliate Marketing The Right Way And Earn!",
+        link: "https://st.depositphotos.com/1826664/4958/i/450/depositphotos_49581325-stock-photo-affiliate-marketing-three-circles.jpg", 
+      
+      },
+      "virtual pencil art": {
+        desc: "Learn To Make Awesome Pencil Arts On Your Smartphone",
+        link: "assets/img/pencilart.jpg"
+    
+      }
     };
 
+      
 
-    // Function to parse query parameters from URL
+
+    // Function to parse query parameters in URL
     function getQueryParam(param) {
       const urlParams = new URLSearchParams(window.location.search);
       return urlParams.get(param);
     }
 
-    // Function to update the video source based on the query parameter
-    function displayVideo() {
+    // Function to update the image source based on the query parameter
+    function displayImage() {
       const title = getQueryParam('title');
       const user = getQueryParam('user');
 
@@ -133,9 +134,9 @@
       if (title && courses[title]) {
         document.getElementById('login-signup-link').setAttribute('href', `signup.html?user=${user}`);
         // Construct the Google Drive video link with the video ID
-        const videoLink = courses[title].link
-        // Update the source of the video iframe
-        document.getElementById('videoFrame').src = videoLink;
+        const imageLink = courses[title].link;
+        // Update the source of the image
+        document.getElementById('course-image').src = imageLink;
         document.getElementById('description').innerText = courses[title].desc;
         // Set the title on the page
         document.title = `${title} - Video`;
@@ -146,10 +147,10 @@
       }
     }
 
-    // Call the function to update the video source on page load
-     document.addEventListener('DOMContentLoaded', function(){
-        displayVideo();
-     })
+    // Call the function to update the image source on page load
+    document.addEventListener('DOMContentLoaded', function() {
+      displayImage();
+    });
   </script>
 </body>
 </html>

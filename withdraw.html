@@ -76,6 +76,7 @@
         <div class="withdraw-header">
             <h2>Withdraw Funds</h2>
             <p>Please enter the details below to withdraw your funds.</p>
+            <h4>NOTE: Withdrawal is allowed only on Mondays and Thursdays</h4>
         </div>
         <form>
            
@@ -111,6 +112,21 @@
 
     const credential = JSON.parse(localStorage.getItem('credential'));
 
+
+function checkDay() {
+  const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+  const now = new Date();
+  const currentDay = days[now.getDay()];
+
+  if (currentDay === "Monday" || currentDay === "Thursday") {
+    return true;
+  } else {
+    console.log("No specific action required today.");
+    return false;
+    
+  }
+}
+
                        
 function finishPayment() {
             // Replace '1234567890' with your actual phone number
@@ -132,27 +148,23 @@ function finishPayment() {
                 
                 const balance = snapshot.val().amount;
 
-                //Compare amount to be withdrawn and balance
+                //Compare amount to be withdrawn and balances
 
-        if(parseInt(amount.value.trim()) < balance){
-                    
+        if(parseInt(amount.value.trim()) < balance && checkDay()){
                           
             const message = encodeURIComponent(
                 'Hello, I want to withdraw an amount of $' + amount.value.trim()
         );
-
             // Generate the WhatsApp link
             const whatsappLink = `https://wa.me/${phoneNumber}?text=${message}`;
             // Open WhatsApp with the pre-filled message
 
             window.open(whatsappLink);
-
    
      }
 
- }
-                
-            }).catch((err) => {
+ }     
+      }).catch((err) => {
                 console.log(err)
             });
 
