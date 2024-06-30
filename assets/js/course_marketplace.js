@@ -29,6 +29,13 @@ const courses = [
     description: "Learn a better strategy for your affiliate marketing journey",
     price: "105.00",
     image: "https://st.depositphotos.com/1826664/4958/i/450/depositphotos_49581325-stock-photo-affiliate-marketing-three-circles.jpg"
+ },
+ {
+    title: "Smartphone Graphic Design",
+    description: "Learn graphic design using just your smartphone",
+    price: "80.00",
+    image: "assets/img/graphic-design.jpg"
+
  }
 ];
 let currentPage = 1;
