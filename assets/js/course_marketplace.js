@@ -31,7 +31,7 @@ const courses = [
     image: "https://st.depositphotos.com/1826664/4958/i/450/depositphotos_49581325-stock-photo-affiliate-marketing-three-circles.jpg"
  },
  {
-    title: "Smartphone Graphic Design",
+    title: "Smartphone Graphics Design",
     description: "Learn graphic design using just your smartphone",
     price: "80.00",
     image: "assets/img/graphic-design.jpg"
