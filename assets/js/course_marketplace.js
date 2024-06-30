@@ -21,13 +21,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // Sample course data
 const courses = [
-    { title: "Virtual Pencil Art", description: "Learn to make beautiful and aesthetic pencil art using just your smartphone.", 
-    image: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjj0NaKDGfjnbxdwkROpNZsBylyXl_YT5a6VY5DiUOGk_D94ELU-JecE4dP93lID_fghg_fjZjlyKVrLwrvmaeArS9_4WryhRx2LoBJjfs98wD5Dn-Ve30JIC5Clfy3CWPAsnl6xrblEg/s1600/Lesson_Drawing2_2.jpg"
+    { title: "Smartphone Digital Art", description: "Learn to make beautiful and aesthetic pencil art using just your smartphone.", 
+    image: "assets/img/pencilart.jpg"
  ,price: '60.00'},
  {
     title: "Affiliate Marketing Mastery(AMM)",
     description: "Learn a better strategy for your affiliate marketing journey",
-    price: "105.00",
+    price: "100.00",
     image: "https://st.depositphotos.com/1826664/4958/i/450/depositphotos_49581325-stock-photo-affiliate-marketing-three-circles.jpg"
  },
  {
