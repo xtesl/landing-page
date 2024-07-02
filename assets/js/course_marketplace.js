@@ -36,6 +36,12 @@ const courses = [
     price: "80.00",
     image: "assets/img/graphic-design.jpg"
 
+ },
+ {
+    title: "Video Editing For All Devices",
+    description: "Master video editing with ease regardless of your device platform",
+    prcie: "50.00",
+    image: "assets/img/video.jpg"
  }
 ];
 let currentPage = 1;
