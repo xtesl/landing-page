@@ -54,7 +54,7 @@
           <li id="e-learning"><a class="nav-link scrollto" href="e-learning.html">E-learning</a></li>
           <li id="login-link"><a class="nav-link scrollto" href="login.html">Login</a></li>
           <li id="logout-link"><a class="nav-link scrollto" href="#">Logout</a></li>
-          <li><a class="nav-link scrollto" href="course_marketplace.html">Courses</a></li>
+          <li id="courses"><a class="nav-link scrollto" href="course_marketplace.html">Courses</a></li>
           <li><a class="nav-link scrollto" href="#cta">Affiliate</a></li>
           <li id="get-started-1"><a class="getstarted scrollto" href="signup.html">Get Started</a></li>
         </ul>
@@ -371,12 +371,15 @@
         document.getElementById('get-started-1').style.display = 'none';
         document.getElementById('logout-link').style.display = 'block';
         document.getElementById('dashboard').style.display = 'block';
+        document.getElementById('courses').style.display = 'block';
       } else {
         document.getElementById('login-link').style.display = 'block';
+        document.getElementById('courses').style.display = 'none';
         document.getElementById('get-started').style.display = 'block';
         document.getElementById('get-started-1').style.display = 'block';
         document.getElementById('logout-link').style.display = 'none';
         document.getElementById('dashboard').style.display = 'none';
+        
       }
       
       document.getElementById('logout-link').addEventListener('click', function() {

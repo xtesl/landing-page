@@ -6,6 +6,69 @@
     <title>Explore Courses</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="assets/css/course_marketplace.css">
+    <style>
+
+.modal {
+        display: none;
+        position: fixed;
+        z-index: 1;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgba(0,0,0,0.4);
+    }
+
+    .modal-content {
+        background-color: white;
+        margin: 20% auto;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        max-width: 300px;
+        text-align: center;
+    }
+
+    .close {
+        color: #aaa;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+    }
+
+    .close:hover,
+    .close:focus {
+        color: black;
+        text-decoration: none;
+        cursor: pointer;
+    }
+
+    .share-button {
+        display: block;
+        width: 100%;
+        margin-top: 10px;
+        padding: 10px;
+        background-color: #37517e;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        text-align: center;
+        text-decoration: none;
+    }
+
+    .share-button:hover {
+        background-color: #1e3a5c;
+    }
+
+    .share-icon {
+        width: 20px;
+        height: 20px;
+        margin-right: 5px;
+        vertical-align: middle;
+    }
+
+    </style>
 </head>
 <body>
     <nav class="navbar bg-blue">
@@ -26,6 +89,24 @@
     <div class="course-container" id="courseContainer"> </div>
     <div id="noResultsMessage" style="display: none; text-align: center; color: red; margin-top: 20px;">No courses available for your search.</div>
 
+ <!-- Modal -->
+ <div id="shareModal" class="modal">
+  <div class="modal-content">
+      <span class="close" onclick="closeShareModal()">&times;</span>
+      <p>Select platform to share:</p>
+      <!-- WhatsApp share button -->
+      <a id="whatsappLink" class="share-button" target="_blank" href="#"> <!-- Empty href for now -->
+          <img class="share-icon" src="assets/img/whatsapp.png" alt="WhatsApp icon">
+          Share on WhatsApp
+      </a>
+      <!-- Facebook share button -->
+      <a id="facebookLink" class="share-button" target="_blank" href="#"> <!-- Empty href for now -->
+          <img class="share-icon" src="assets/img/facebook.png" alt="Facebook icon">
+          Share on Facebook
+      </a>
+      <!-- Add more buttons for other platforms -->
+  </div>
+</div>
 
     <!-- Pagination Controls -->
 <div class="pagination">
@@ -38,6 +119,90 @@
   <div class="footer">
     <p>&copy; 2024 Greater Grace Institute. All rights reserved.</p>
   </div>
+  <script>
+
+    document.addEventListener("DOMContentLoaded", function(){
+       const isLoggedIn = localStorage.getItem('isLoggedIn');
+       if(!isLoggedIn){
+         window.location.href = 'login.html';
+       }
+    });
+  </script>
   <script src="assets/js/course_marketplace.js"></script>
+  <script>
+
+ function openShareModal(videoTitle) {
+      const credential = JSON.parse(localStorage.getItem('credential'));
+      const user = credential.user.uid;
+      // Generate the video URL with query parameter
+      const videoURL = `https://greater-grace-institute.onrender.com/vid.html?title=${encodeURIComponent(videoTitle)}&user=${encodeURIComponent(user)}`;
+      // Set the href attribute of WhatsApp and Facebook links
+      document.getElementById('whatsappLink').href = `https://wa.me/?text=Check%20out%20this%20amazing%20course!%20${encodeURIComponent(videoURL)}`;
+      document.getElementById('facebookLink').href = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(videoURL)}&quote=${encodeURIComponent(videoTitle)}`;
+
+      // Display the modal
+      document.getElementById('shareModal').style.display = 'block';
+    }
+
+      // Function to close the share modal
+    function closeShareModal() {
+      document.getElementById('shareModal').style.display = 'none';
+    }
+
+  
+
+  document.addEventListener('DOMContentLoaded', function(){
+          const courseCards = document.getElementById('courseContainer');
+          courseCards.addEventListener('click', function(e){
+             if(e.target && e.target.name == "share-btn"){
+              console.log(e.target.dataset.title);
+                openShareModal(e.target.dataset.title.toLowerCase());
+             }
+          });
+  });
+
+  </script>
+  <script type="module"> 
+   import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-app.js";
+    import { getDatabase, get, ref } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-database.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyBs6eNM7ig2Yaly16j1a3FIo70RyyrSYvU",
+      authDomain: "learnify-419911.firebaseapp.com",
+      projectId: "learnify-419911",
+      storageBucket: "learnify-419911.appspot.com",
+      messagingSenderId: "600218874857",
+      appId: "1:600218874857:web:2d65e1d3e68b840938d178",
+      measurementId: "G-M8PS7BKZL0"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getDatabase();
+    const dbref = ref(db);
+    
+    const credential = JSON.parse(localStorage.getItem('credential'));
+ function checkAffiliate(){
+    get(ref(db, "users/" + credential.user.uid)).then((snapshot) => {
+
+       if(snapshot.exists()){
+          const shareButtons = document.querySelectorAll('.course-card .share');
+          
+          //Check for affiliate users
+          if(snapshot.val().affiliate){
+            shareButtons.forEach(shareButton => {
+                  shareButton.style.display = 'block';
+            });
+       }
+      }
+      
+    }).catch((err) => {
+      
+    });
+  }
+
+  document.addEventListener("DOMContentLoaded", function(){
+     checkAffiliate();
+  });
+  </script>
 </body>
 </html>

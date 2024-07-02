@@ -8,11 +8,11 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    const enrollButtons = document.querySelectorAll('.course-card .btn');
+    const enrollButtons = document.querySelectorAll('.course-card .enroll');
+    console.log(enrollButtons);
 
     enrollButtons.forEach(button => {
         button.addEventListener('click', () => {
-            const courseCard = button.closest('.course-card');
           
             window.location.href = 'enroll_page.html';
         });
@@ -61,11 +61,13 @@ function renderCourses(page) {
         
        <img src="${course.image}" class="course-image"></img>
             <div class="course-info">
-                <h3>${course.title}</h3>
+                <h3 class="course-title">${course.title}</h3>
                 <h1 style="display:none">${course.price}</h1>
                 <p>${course.description}</p>
 
-                <button class="btn">Enroll Now</button>
+                <button class="enroll btn">Enroll Now</button>
+                <hr>
+                <button data-title="${course.title}" name="share-btn" class="share btn" style="display:none">Share</button>
                 <hr>
                 <div class="card-footer d-flex justify-content-between align-items-center">
                 <h4>GHS ${course.price}</h4>
@@ -150,7 +152,7 @@ function renderCoursesSpecific(coursesToRender) {
 }
 
 function addEnrollListeners() {
-    const enrollButtons = document.querySelectorAll('.course-card .btn');
+    const enrollButtons = document.querySelectorAll('.course-card .enroll');
 
     enrollButtons.forEach(button => {
         button.addEventListener('click', () => {

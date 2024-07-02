@@ -190,6 +190,7 @@
     const app = initializeApp(firebaseConfig);
     const db = getDatabase();
     const dbref = ref(db);
+
     const credential = JSON.parse(localStorage.getItem('credential'));
     const courseList = document.getElementById('courseList');
 
@@ -217,7 +218,6 @@
 
 
 
-    console.log(credential.user.uid);
     get(ref(db, 'users/' + credential.user.uid)).then((snapshot) => {
       if (snapshot.exists()) {
       
