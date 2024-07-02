@@ -28,7 +28,7 @@ const courses = [
     title: "Affiliate Marketing Mastery(AMM)",
     description: "Learn a better strategy for your affiliate marketing journey",
     price: "100.00",
-    image: "https://st.depositphotos.com/1826664/4958/i/450/depositphotos_49581325-stock-photo-affiliate-marketing-three-circles.jpg"
+    image: "assets/img/affiliate.jpg"
  },
  {
     title: "Smartphone Graphics Design",
