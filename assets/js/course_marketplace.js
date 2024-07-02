@@ -40,7 +40,7 @@ const courses = [
  {
     title: "Video Editing For All Devices",
     description: "Master video editing with ease regardless of your device platform",
-    prcie: "50.00",
+    price: "50.00",
     image: "assets/img/video.jpg"
  }
 ];
