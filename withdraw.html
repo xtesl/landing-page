@@ -153,7 +153,7 @@ function finishPayment() {
         if(parseInt(amount.value.trim()) < balance && checkDay()){
                           
             const message = encodeURIComponent(
-                'Hello, I want to withdraw an amount of $' + amount.value.trim()
+                'Hello, I want to withdraw an amount of $' + amount.value.trim() * 5
         );
             // Generate the WhatsApp link
             const whatsappLink = `https://wa.me/${phoneNumber}?text=${message}`;
