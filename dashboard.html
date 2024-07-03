@@ -141,6 +141,8 @@
   <!-- End navbar -->
   <!-- Body -->
   <div class="container mt-4">
+    <h3 id="welcome-msg"></h3>
+    <hr>
     <h3 class="mb-4">Dashboard Metrics</h3>
 
     <div class="dashboard">
@@ -275,6 +277,9 @@ function goToCourse(title, imageSrc) {
 
     get(ref(db, 'users/' + credential.user.uid)).then((snapshot) => {
       if (snapshot.exists()) {
+
+        document.getElementById('welcome-msg').innerHTML = 'Welcome, ' + 
+        `${snapshot.val().firstname} ${snapshot.val().lastname}!`
          
         if(snapshot.val().affiliate){
           amount.innerText = `Balance: $${snapshot.val().amount}.00`;
