@@ -101,10 +101,13 @@
                          get(ref(db, "users/" + father)).then((snapshot)=>{
                             if(snapshot.exists){
                               const currentAmount = parseInt(snapshot.val().amount);
-                              const amountRewarded = (parseInt(amountPaid.value.trim()) / 2) / 10
+                              const amountRewarded = (parseInt(amountPaid.value.trim()) / 2) / 5
                               const totalAmount = currentAmount + amountRewarded;
+                              const salesMade = parseInt(snapshot.val().sales);
+                              salesMade += 1;
                             update(ref(db, "users/" + father), {
-                                amount: totalAmount
+                                amount: totalAmount,
+                                sales: salesMade
                             }).then(()=>{
 
                             }).catch((err)=>{
