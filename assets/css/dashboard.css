@@ -1,7 +1,11 @@
 /* Updated CSS for responsiveness and style */
+
+
 body {
-  font-family: Arial, sans-serif;
-  background-color: #f9f9f9;
+  /* color: #011b33; */
+  font-family: Graphik, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", Segoe UI Symbol;
+  font-size: 1.6rem;
+  line-height: 1.5;
   margin: 0; /* Reset default margin */
   padding-bottom: 80px; /* Add space for footer */
 }
@@ -11,8 +15,9 @@ body {
   padding-bottom: 20px; /* Add some padding at the bottom */
 }
 
-h3 {
-  color: #37517e;
+h1, h2, h3, h4, h5 {
+  color: #011b33;
+  margin: 0 0 10px;
 }
 
 .course-card {
@@ -82,7 +87,11 @@ h3 {
   opacity: 0; /* Initially hidden */
   transition: opacity 0.3s ease;
 }
-
+h1, h2, h3 {
+  font-family: Boing, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", Segoe UI Symbol;
+  line-height: 1.2;
+  font-weight: 800;
+}
 .navbar {
   background: linear-gradient(135deg, #37517e, #3a7bd5); /* Gradient background */
   color: white;

@@ -19,31 +19,32 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
-// Sample course data
-const courses = [
-    { title: "Smartphone Digital Art", description: "Learn to make beautiful and aesthetic pencil art using just your smartphone.", 
-    image: "assets/img/pencilart.jpg"
- ,price: '60.00'},
- {
-    title: "Affiliate Marketing Mastery(AMM)",
-    description: "Learn a better strategy for your affiliate marketing journey",
-    price: "100.00",
-    image: "assets/img/affiliate.jpg"
- },
- {
-    title: "Smartphone Graphics Design",
-    description: "Learn graphic design using just your smartphone",
-    price: "80.00",
-    image: "assets/img/graphic-design.jpg"
+let courses = null;
+async function getCourses(){
+    const accessToken = localStorage.getItem('accessToken');
+    return await fetch('https://api.learnnet.africa/api/v1/listing/courses/', {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${accessToken}`
+        },
+      })
+      .then(response => {
 
- },
- {
-    title: "Video Editing For All Devices",
-    description: "Master video editing with ease regardless of your device platform",
-    price: "50.00",
-    image: "assets/img/video.jpg"
- }
-];
+        if(!response.ok){
+            
+        }
+        return response.json();
+      })
+      .then(data =>{
+        console.log(data.data.results);
+         return data.data.results;
+         
+      })
+      .catch(error => console.error('Error:', error));
+      
+}
+
 let currentPage = 1;
 const perPage = 6;
 
@@ -59,7 +60,7 @@ function renderCourses(page) {
         courseCard.className = 'course-card';
         courseCard.innerHTML = `
         
-       <img src="${course.image}" class="course-image"></img>
+       <img src="${course.banner}" class="course-image"></img>
             <div class="course-info">
                 <h3 class="course-title">${course.title}</h3>
                 <h1 style="display:none">${course.price}</h1>
@@ -71,6 +72,7 @@ function renderCourses(page) {
                 <hr>
                 <div class="card-footer d-flex justify-content-between align-items-center">
                 <h4>GHS ${course.price}</h4>
+                <h5 style="display: none;">${course.id}</h5>
                 </div>
                 <div class="card-footer d-flex justify-content-between align-items-center">
                 <h5>Commission: 50%</h6>
@@ -96,7 +98,8 @@ function changePage(direction) {
     renderCourses(currentPage);
 }
 
-window.onload = function() {
+window.onload =  async function() {
+    courses = await getCourses();
     document.getElementById('totalPages').textContent = Math.ceil(courses.length / perPage);
     changePage(0); // Load initial page
 };
@@ -161,7 +164,8 @@ function addEnrollListeners() {
                 title: courseCard.querySelector('h3').textContent,
                 description: courseCard.querySelector('p').textContent,
                 image: courseCard.querySelector('img').src,
-                price: courseCard.querySelector('h1').textContent
+                price: courseCard.querySelector('h1').textContent,
+                id: courseCard.querySelector('h5').textContent
             };
             localStorage.setItem('course', JSON.stringify(course));
             window.location.href = 'enroll_page.html';
